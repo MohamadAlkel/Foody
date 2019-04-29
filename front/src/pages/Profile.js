@@ -2,52 +2,40 @@ import React, { Component } from 'react';
 import '../styles/profile.css';
 import { Card, Button, CardImg, CardTitle, CardText, CardColumns,
   CardSubtitle, CardBody } from 'reactstrap';
+  import pro from '../styles/img/pro.jpg'
+
 
 class Profile extends Component {
   render() {
     return (
     <>
-        <div className="row topSpace">
+        <div className="topSpace">
 
-          <div className="col-xl-6" >
-          <Card>
-        <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
-        <CardBody>
-          <CardTitle>Card title</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
-          <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-          <Button>Button</Button>
-        </CardBody>
-      </Card>
+          <Card className="block">
+            <div className="col-md-6">
+              <CardImg className="images" top width="100%" src={pro} alt="Card image cap" />
+            </div>
+            <div className="col-md-6">  
+              <CardBody>
+                <CardTitle>Card title</CardTitle>
+                <CardSubtitle>Card subtitle</CardSubtitle>
+                <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+                <Button>Button</Button>
+              </CardBody>
+            </div>  
 
-      <Card>
-        <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
-        <CardBody>
-          <CardTitle>Card title</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
-          <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-          <Button>Button</Button>
-        </CardBody>
-      </Card>
+          </Card>
 
+          <Card className="block">
+            <CardImg className="images" top width="100%" src={pro} alt="Card image cap" />
+            <CardBody>
+              <CardTitle>Card title</CardTitle>
+              <CardSubtitle>Card subtitle</CardSubtitle>
+              <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <Button>Button</Button>
+            </CardBody>
+          </Card>
 
-      <Card>
-        <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=256%C3%97180&w=256&h=180" alt="Card image cap" />
-        <CardBody>
-          <CardTitle>Card title</CardTitle>
-          <CardSubtitle>Card subtitle</CardSubtitle>
-          <CardText>This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-          <Button>Button</Button>
-        </CardBody>
-      </Card>
-            
-          </div>
-
-          <div  className="col-xl-6 profiles">
-          
-             
-          </div>
-      
         </div>
     </>
     )
