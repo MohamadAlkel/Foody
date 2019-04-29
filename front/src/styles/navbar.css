@@ -1,0 +1,105 @@
+*{
+   padding: 0;
+   margin:0;
+}
+
+body{
+   background-color: #38373d;
+   font-family: consolas;
+   background-image: url("../styles/img/back.jpg");
+   background-repeat: no-repeat;
+}
+
+.row{
+   margin: 0;
+   padding: 0
+}
+
+.navitem{
+   color: #9a9a9b;
+   font-size :21px;
+   transition:  1000ms;
+   font-family: arial;
+   text-decoration: none;
+}
+
+.navitem:hover{
+   color:#d67332;
+   font-size : 24px;
+   text-decoration: none;
+   font-weight: 400;
+   border-bottom: 3px solid #d67332;
+   padding-top:14px;
+   padding-left: 10px;
+   padding-right: 10px;
+   padding-bottom:16px
+}
+
+.active{
+   color:#d67332;
+   font-size : 24px;
+   text-decoration: none;
+   font-weight: 400;
+   border-bottom: 3px solid #d67332;
+   padding-top:14px;
+   padding-bottom:16px;
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+.blue.active{
+   color:#519aba;
+   border-bottom: 3px solid #519aba;
+}
+
+.blue:hover{
+   color:#519aba;
+   border-bottom: 3px solid #519aba;
+}
+
+.green.active{
+   color:#fc69c1;
+   border-bottom: 3px solid #fc69c1;
+}
+
+.green:hover{
+   color:#fc69c1;
+   border-bottom: 3px solid #fc69c1;
+}
+
+.pink.active{
+   color:#c1c13f;
+   border-bottom: 3px solid #c1c13f;
+}
+
+.pink:hover{
+   color:#c1c13f;
+   border-bottom: 3px solid #c1c13f;
+}
+
+div.onenav {
+   width: 180px;
+}
+
+.imges {
+   height : 26px;
+   padding-right: 7px;
+   padding-bottom: 5px
+}
+
+.navstyle {
+   background-color : #252526;
+   height : 60px;
+   width: 100%;
+   z-index: 10;
+   position: fixed;
+   top:0
+}
+
+.open{
+   width: auto;
+   height: 100px;
+   background-color: #252526;
+   width: 100%;
+   margin: auto
+}
