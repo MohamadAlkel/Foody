@@ -1,0 +1,137 @@
+.topSpaceEx  {
+    margin-top: 18vh
+}
+
+.topspaceTwo{
+  margin-top:76px
+}
+
+.leftSpace{
+  padding-left: 30px;
+}
+
+.leftspaceTwo{
+  padding-left: 20px;
+}
+
+
+.textTitle{
+  font-size: 36px;
+  padding-bottom: 20px;
+  color: #519aba;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.borders{
+  border-left: 5px double #519aba;
+  padding-left: 70px;
+}
+
+.textTitleOne{
+  font-size: 40px;
+  color: #519aba;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.skills{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  position: relative;
+  width: 170px;
+  height: 8vh;
+}
+
+.skillsValue{
+  position: absolute;
+  top:24px;
+  height: 3px;
+  width: 140px;
+  background-color: #605f64;
+  border-radius: 3px;
+}
+
+.progress-bar{
+    border-radius: 3px;
+    background-color: #519aba;
+}
+
+.skillsText{
+  position: absolute;
+  top:0;
+  left: 3px;
+  font-size: 17px;
+  color: rgb(241, 240, 240);
+  text-align: left;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.ex{
+    width: 100%;
+    padding-left: 20px;
+    margin-bottom: 5vh;
+    font-family: Arial, Helvetica, sans-serif;
+    border-left: 4px solid #519aba; 
+    text-align: left;
+    line-height: 1.2;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.exText{
+   font-size: 18px;
+   color: #fff;
+   font-weight: bold;   
+}
+
+.exTextOne{
+    font-size: 16px;
+    color: #fff;
+    font-weight: 400;
+    font-family: Arial, Helvetica, sans-serif;
+ }
+
+ .exTextTwo{
+  font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(196, 192, 192);
+    font-weight: 200;
+ }
+
+
+ .certs{
+   background-color: #519aba;
+   margin-top: 20px;
+   width: 100%;
+   min-height: 90px;
+   border-radius: 3px;
+   text-align: left;
+   border-left: 3px solid #fff;
+   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.062), 0 6px 20px 0 rgba(0, 0, 0, 0.034);
+  }
+
+  .certs{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.5);
+   }
+  
+  .certText{
+    padding: 5px 8px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(255, 255, 255);
+    font-weight: 400; 
+ }
+
+ .delete{
+   padding: 6px;
+ }
+
+ .certTextOne{
+  padding: 2px 5px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: rgb(255, 255, 255);
+  font-weight: 200;
+ }

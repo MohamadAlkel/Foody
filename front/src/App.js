@@ -1,4 +1,10 @@
+
 import './styles/navbar.css';
+import Logo from './styles/img/logos.png'
+import Profile_img from './styles/img/profile.png'
+import work from './styles/img/work.png'
+import portfolio from './styles/img/portfolio.png'
+import contact from './styles/img/contact.png'
 import {
   Collapse,
   Navbar,
@@ -9,12 +15,18 @@ import {
   } from 'reactstrap';
 import React, { Component } from 'react';
 import './App.css';
+import  Profile  from './pages/Profile';
+import  Ex  from './pages/Ex';
+// import  Contact  from './pages/Contact';
+import  Portfolio  from './pages/Portfolio';
+import Notfound  from "./pages/Notfound"
 import {
   Route,
   NavLink,
   BrowserRouter as Router,
   Switch,
 } from 'react-router-dom'
+
 
 
 
@@ -76,7 +88,7 @@ class App extends Component {
                       </NavLink>
                     </NavItem>
                     </div>
-                    <div className={navbaritem}>
+                    {/* <div className={navbaritem}>
                     <NavItem>
                       <NavLink 
                         to="/Contact"
@@ -85,7 +97,7 @@ class App extends Component {
                       > <img className="imges" src={contact} alt="img" />Contact
                       </NavLink>
                     </NavItem>
-                    </div> 
+                    </div>  */}
                   </Nav>
                 </Collapse>
             </Navbar>
@@ -93,7 +105,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Profile} />
             <Route path="/Experience" component={Ex} />
-            <Route path="/Contact" component={Contact} />
+            {/* <Route path="/Contact" component={Contact} /> */}
             <Route path="/Portfolio" component={Portfolio} />
             <Route  component={Notfound} />
           </Switch>
@@ -105,3 +117,18 @@ class App extends Component {
 }
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+

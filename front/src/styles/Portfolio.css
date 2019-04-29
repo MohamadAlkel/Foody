@@ -1,0 +1,54 @@
+.imgCard{
+    height: 200px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.color{
+    color:#fc6ac1;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #25252600;
+    border: 4px solid #252526;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: left;
+}
+
+.btns{
+    display: flex;
+    width: 90%;
+    text-align: center;
+    margin: auto;
+    padding: 5px;
+    justify-content: center;
+    background-color: #fc6ac200;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    border: 3px solid #fc6ac1;
+    transition: 1000ms;    
+}
+
+.btns:hover{
+    border: 3px solid #fc6ac1;
+    background-color: #fc6ac1;
+}
+
+.top{
+    margin-bottom:0;
+    font-size: 22px;
+    font-weight: bold;
+    padding: 0;
+    padding-top: 20px;
+}
+
+.textCard{ 
+    font-size: 18px;
+    border-radius: 5px;
+    color:#fff;
+}
+
+.card-body{
+    padding: 0;
+}
