@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import { Card, Button, CardImg, CardTitle, CardColumns,
-    CardSubtitle, CardBody } from 'reactstrap';
+import { Card, CardImg, CardTitle, CardText, CardColumns,
+    CardSubtitle, CardBody,  Button,   
+     } from 'reactstrap';
 import '../styles/profile.css';
 import '../styles/Portfolio.css';
-import wedo from '../styles/img/wedo.png'
-import wush from '../styles/img/wush.jpg'
-import Jubba from '../styles/img/Jubba.jpg'
-import IPLACE from '../styles/img/IPLACE.jpg'
-import laz from '../styles/img/laz.jpg'
-import GLLERY from '../styles/img/GLLERY.jpg'
-import YUMMY from '../styles/img/YUMMY.jpg'
 import pro from '../styles/img/pro.jpg'
+import time from '../styles/img/time.png'
+import location from '../styles/img/location.png'
+
 
 
 
@@ -20,173 +17,149 @@ class Profile extends Component {
   render() {
     return (
     <div>
-      
-      <CardColumns  className="topSpace ml-4 mr-4">
+      <div className="profilePage">
+        <div className="row">
+          <div className="col-md-3">
+              
+                <div className="userPhoto">
+                    <img className="userPhoto"/>
+                </div>
+                <p className="username">username</p>
+                <p className="job">work on</p>
+                <Button color="success">Edit Profile</Button><br/>
+               
+          </div>
 
-      <Card className=" color ">
-      <div className="row">
-        <div className="col-xl-8 pr-0">
-            <div className="imgCard ">
-                <CardImg className="border" top  src={wedo} alt="Card image cap" />
-            </div>
-        </div>
-        <div className="col-xl-4 pl-0 pr-1">
-            <CardBody>
-            <CardTitle className="top"> | Wedo </CardTitle>
-            <CardSubtitle className="textCard pl-3 mt-2"> UI UX Design</CardSubtitle>
-            
-            </CardBody>
-        </div>
-      </div>
-      <div className="row">
-         <Button href="https://www.behance.net/gallery/72999029/Daily-Tasks" target="_blank"  className="btns m-3">See all Project</Button>
-      </div>
-      </Card>
+          <div className="borderLeft col-md-9">
+            <div className="brief">
 
-      <Card className=" color ">
-      <div className="row">
-        <div className="col-xl-8 pr-0">
-            <div className="imgCard ">
-                <CardImg className="border" top  src={wush} alt="Card image cap" />
-            </div>
-        </div>
-        <div className="col-xl-4 pl-0 pr-1">
-            <CardBody>
-            <CardTitle className="top"> | Wushoo </CardTitle>
-            <CardSubtitle className="textCard pl-3 mt-2"> UI UX Design</CardSubtitle>
-            
-            </CardBody>
-        </div>
-      </div>
-      <div className="row">
-         <Button href="https://www.behance.net/gallery/72798271/Wushoo" target="_blank"  className="btns m-3">See all Project</Button>
-      </div>
-      </Card>
+              <div className="row userInfo">
+                <div className="col-sm-4 oneInfo">
+                    <p className="numInfo">220</p>
+                    <p className="aboutInfo">Recipes</p>
+                </div>
+                <div className=" col-sm-4 oneInfo">
+                    <p className="numInfo">220</p>
+                    <p className="aboutInfo">Recipes</p>
+                </div>
+                <div className=" col-sm-4 oneInfo">
+                    <p className="numInfo">220</p>
+                    <p className="aboutInfo">Recipes</p>
+                </div>
+              </div>
 
-      <Card className=" color ">
-      <div className="row">
-        <div className="col-xl-8 pr-0">
-            <div className="imgCard ">
-                <CardImg className="border" top  src={Jubba} alt="Card image cap" />
+              <p className="topGreen">_ Brief</p>
+              <h6 className="textBrief">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</h6>
+              <Button className="btnUser" color="success">Add New Recipe</Button>
             </div>
-        </div>
-        <div className="col-xl-4 pl-0 pr-1">
-            <CardBody>
-            <CardTitle className="top"> |  Jubba airways </CardTitle>
-            <CardSubtitle className="textCard pl-3 mt-2"> UI UX Design</CardSubtitle>
-            
-            </CardBody>
+          </div>           
         </div>
       </div>
-      <div className="row">
-         <Button href="https://www.behance.net/gallery/72807405/Redesign-Jubba-airways" target="_blank" className="btns m-3">See all Project</Button>
-      </div>
-      </Card>
 
-      <Card className=" color ">
-      <div className="row">
-        <div className="col-xl-8 pr-0">
-            <div className="imgCard ">
-                <CardImg className="border" top  src={IPLACE} alt="Card image cap" />
-            </div>
-        </div>
-        <div className="col-xl-4 pl-0 pr-1">
-            <CardBody>
-            <CardTitle className="top"> | IPLACE </CardTitle>
-            <CardSubtitle className="textCard pl-3 mt-2"> UI UX Design</CardSubtitle>
-            
-            </CardBody>
-        </div>
-      </div>
-      <div className="row">
-         <Button href="https://www.behance.net/gallery/71292473/IPLACE" target="_blank" className="btns m-3">See all Project</Button>
-      </div>
-      </Card>
+      <CardColumns className="cardStyle">
 
-      <Card className=" color ">
-      <div className="row">
-        <div className="col-xl-8 pr-0">
-            <div className="imgCard ">
-                <CardImg className="border" top  src={laz} alt="Card image cap" />
+        <Card >
+        <div className="warpCard">
+          <div className="colors">
+            <div className="row">
+              <div className=" user">
+                <CardImg top className="userImg"  src={pro} alt="Card image cap" />
+                <div className="userText">
+                  <CardSubtitle className="usernamePost">username</CardSubtitle>
+                  <CardText className="timePost">time.</CardText>
+                </div>
+              </div>
             </div>
-        </div>
-        <div className="col-xl-4 pl-0 pr-1">
-            <CardBody>
-            <CardTitle className="top"> | LAZADA </CardTitle>
-            <CardSubtitle className="textCard pl-3 mt-2"> UI UX Design</CardSubtitle>
             
-            </CardBody>
-        </div>
-      </div>
-      <div className="row">
-         <Button href="https://www.behance.net/gallery/71899325/Redesign-LAZADA" target="_blank" className="btns m-3">See all Project</Button>
-      </div>
-      </Card>
+            <CardImg top width="100%" className="recipeImg" src={pro} alt="Card image cap" />
+            <CardTitle className="info"> <img className="icon" src={time} /> 03:30   <img className="icon" src={location} /> malaysia</CardTitle>
 
-      <Card className=" color ">
-      <div className="row">
-        <div className="col-xl-8 pr-0">
-            <div className="imgCard ">
-                <CardImg className="border" top  src={GLLERY} alt="Card image cap" />
+            <div className="row">
+              <a className="cir" href="#" target="_blank">❤</a>
+              <CardTitle className="recipeHead">Foodtext</CardTitle>
             </div>
+          </div>  
+          
+          <CardBody className="colorsTwo">
+            <div className="insideGreen">
+              <CardTitle className="headGreen">_ Ingredients</CardTitle>
+              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <CardTitle className="headGreen">_ Directions</CardTitle>
+              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+            </div>
+          </CardBody>
         </div>
-        <div className="col-xl-4 pl-0 pr-1">
-            <CardBody>
-            <CardTitle className="top"> | MUEBLE GLLERY </CardTitle>
-            <CardSubtitle className="textCard pl-3 mt-2"> UI UX Design</CardSubtitle>
-            
-            </CardBody>
-        </div>
-      </div>
-      <div className="row">
-         <Button href="https://www.behance.net/gallery/70379393/MUEBLE-GLLERY" target="_blank" className="btns m-3">See all Project</Button>
-      </div>
-      </Card>
+        </Card>
 
-      <Card className=" color ">
-      <div className="row">
-        <div className="col-xl-8 pr-0">
-            <div className="imgCard ">
-                <CardImg className="border" top  src={YUMMY} alt="Card image cap" />
+        <Card >
+        <div className="warpCard">
+          <div className="colors">
+            <div className="row">
+              <div className=" user">
+                <CardImg top className="userImg"  src={pro} alt="Card image cap" />
+                <div className="userText">
+                  <CardSubtitle className="usernamePost">username</CardSubtitle>
+                  <CardText className="timePost">time.</CardText>
+                </div>
+              </div>
             </div>
-        </div>
-        <div className="col-xl-4 pl-0 pr-1">
-            <CardBody>
-            <CardTitle className="top"> | YUMMY </CardTitle>
-            <CardSubtitle className="textCard pl-3 mt-2"> UI UX Design</CardSubtitle>
             
-            </CardBody>
-        </div>
-      </div>
-      <div className="row">
-         <Button href="https://www.behance.net/gallery/69392387/YUMMY" target="_blank"  className="btns m-3">See all Project</Button>
-      </div>
-      </Card>
+            <CardImg top width="100%" className="recipeImg" src={pro} alt="Card image cap" />
+            <CardTitle className="info"> <img className="icon" src={time} /> 03:30   <img className="icon" src={location} /> malaysia</CardTitle>
 
-      <Card className=" color ">
-      <div className="row">
-        <div className="col-xl-8 pr-0">
-            <div className="imgCard ">
-                <CardImg className="border" top  src={pro} alt="Card image cap" />
+            <div className="row">
+              <a className="cir" href="#" target="_blank">❤</a>
+              <CardTitle className="recipeHead">Foodtext</CardTitle>
             </div>
+          </div>  
+          
+          <CardBody className="colorsTwo">
+            <div className="insideGreen">
+              <CardTitle className="headGreen">_ Ingredients</CardTitle>
+              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <CardTitle className="headGreen">_ Directions</CardTitle>
+              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+            </div>
+          </CardBody>
         </div>
-        <div className="col-xl-4 pl-0 pr-1">
-            <CardBody>
-            <CardTitle className="top"> | My Profile </CardTitle>
-            <CardSubtitle className="textCard pl-3 mt-2"> UI UX Design</CardSubtitle>
-            <CardSubtitle className="textCard pl-3 mt-2"> Front-end dev</CardSubtitle>
+        </Card>
+
+        <Card >
+        <div className="warpCard">
+          <div className="colors">
+            <div className="row">
+              <div className=" user">
+                <CardImg top className="userImg"  src={pro} alt="Card image cap" />
+                <div className="userText">
+                  <CardSubtitle className="usernamePost">username</CardSubtitle>
+                  <CardText className="timePost">time.</CardText>
+                </div>
+              </div>
+            </div>
             
-            </CardBody>
+            <CardImg top width="100%" className="recipeImg" src={pro} alt="Card image cap" />
+            <CardTitle className="info"> <img className="icon" src={time} /> 03:30   <img className="icon" src={location} /> malaysia</CardTitle>
+
+            <div className="row">
+              <a className="cir" href="#" target="_blank">❤</a>
+              <CardTitle className="recipeHead">Foodtext</CardTitle>
+            </div>
+          </div>  
+          
+          <CardBody className="colorsTwo">
+            <div className="insideGreen">
+              <CardTitle className="headGreen">_ Ingredients</CardTitle>
+              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+              <CardTitle className="headGreen">_ Directions</CardTitle>
+              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
+            </div>
+          </CardBody>
         </div>
-      </div>
-      <div className="row">
-         <Button href="/" target="_blank" className="btns m-3">See all Project</Button>
-      </div>
-      </Card>      
-      
-    </CardColumns>
-      
-      </div>
+        </Card>
+        
+      </CardColumns>
+
+    </div>
     )
   }
 }
