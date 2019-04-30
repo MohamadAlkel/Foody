@@ -9,7 +9,7 @@
 }
 
 .topSpace  {
-    margin-top: 16vh
+    margin-top: 14vh
 }
 
 .text {
@@ -77,6 +77,53 @@
     color: #38373d;
 }  
 
+/* ///////////////////////////////start here ///////////////////////// */
+
+.warpCard{
+    /* padding: 16px; */
+    background-color:#00ba51; 
+}
+
+.recipeImg{
+    border-radius: 10px;
+}
+
+.cir{
+  font-size: 24px;
+  color:#fff;
+  background-color: #00ba51;
+  width: 50px;
+  height: 50px;
+  margin-left:20px;
+  border-radius: 100%;
+  padding-top: 7px;
+}
+
+.recipeHead{
+    margin-top: 5px;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.ingred{
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.colors{
+    padding: 16px;
+    background-color: #fff;
+    border-bottom-left-radius: 70px;
+    
+}
+
+.colorsTwo{
+    background-color: #00ba51;
+    border-top-left-radius: 100px;
+}
+
+
+
 .type {
     font-size : 20px;
     color: #9a9a9b;
@@ -98,3 +145,60 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
 }
+
+.cardStyle{
+    /* width: 90%; */
+    margin: 25px
+}
+
+.userImg{
+    height: 54px;
+    width: 54px;
+    border-radius:5px;
+    /* margin-top: 15px; */
+    margin-right: 0
+}
+
+
+.user{
+    display: flex;
+    
+}
+
+.userText{
+    text-align: left;
+    /* margin-top: 16px; */
+  
+    padding-left: 14px;
+}
+
+.usernamePost{
+    font-size:20px;
+    font-weight: 400;
+}
+
+.timePost{
+    font-size:16px;
+    color: rgb(161, 161, 161);
+}
+
+@media(min-width: 550px){
+    .card-columns{        
+        column-count: 1;
+    }
+}
+
+@media(min-width: 600px){
+    .card-columns{        
+        column-count: 2;
+    }
+}
+
+@media(min-width: 900px){
+    .card-columns{        
+        column-count: 3;
+    }
+}
+
+ 
+    
