@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Button, CardImg, CardTitle, CardText, CardColumns,
+import { Card, CardImg, CardTitle, CardText, CardColumns,
   CardSubtitle, CardBody } from 'reactstrap';
   import pro from '../styles/img/pro.jpg'
 import '../styles/profile.css';
@@ -113,10 +113,6 @@ class Profile extends Component {
         </div>
         </Card>
         
-
-
-        
-      
       </CardColumns>
     </div>
     )

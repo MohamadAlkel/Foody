@@ -22,6 +22,12 @@ body{
    text-decoration: none;
 }
 
+body{
+   background-attachment:fixed;
+   background-image: url("../styles/img/back.jpg");
+   background-repeat: no-repeat;
+ }
+
 .navitem:hover{
    color:#00ba51;
    font-size : 22px;
