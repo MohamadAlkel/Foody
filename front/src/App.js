@@ -65,7 +65,6 @@ class App extends Component {
                         activeClassName="active"
                         className="navitem" 
                       > 
-                      {/* <img className="imges" src={Profile_img} alt="img" /> */}
                       Recipe
                       </NavLink>
                     </NavItem>  
