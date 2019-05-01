@@ -11,7 +11,8 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem
+  NavItem,
+  Button
   } from 'reactstrap';
 import React, { Component } from 'react';
 import './App.css';
@@ -96,6 +97,7 @@ class App extends Component {
                     </NavItem>
                     </div>
                     
+                    <Button className="btns" color="success" >Sign in/Sign up</Button>
                   </Nav>
                 </Collapse>
             </Navbar>
