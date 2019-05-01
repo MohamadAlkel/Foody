@@ -2,10 +2,15 @@ import React from 'react';
 import { Form, FormGroup, Label, Input, Col, FormText , Row} from 'reactstrap';
 import '../styles/Portfolio.css';
 
+import  Country  from './CountrySelector';
+
+
+
 const FormRecipe = () => 
   <>
     <Form>
     <Row form>
+
     <FormGroup>
           <Label for="exampleFile">_Images</Label>
           <Input type="file" name="file" id="exampleFile" />
@@ -13,6 +18,7 @@ const FormRecipe = () =>
             This is some placeholder block-level.
           </FormText>
         </FormGroup>
+
         <Col md={12}>
         <FormGroup>
           <Label for="exampleText">_Ingredients</Label>
@@ -56,9 +62,24 @@ const FormRecipe = () =>
           />
         </FormGroup>
 
+        </Col>
+
+        <Col md={12}>
+
+            <Country/>
+        </Col>
+      
+        <Col md={12}>
+        <FormGroup>
+          <Label for="exampleFile">_Images</Label>
+          <Input type="file" name="file" id="exampleFile" />
+          <FormText color="muted">
+            This is some placeholder block-level.
+          </FormText>
+        </FormGroup>
+        </Col>
         
 
-        </Col>
         </Row>
    
       </Form>   

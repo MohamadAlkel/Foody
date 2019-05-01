@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardTitle, CardText, CardColumns,
   CardSubtitle, CardBody } from 'reactstrap';
   import pro from '../styles/img/pro.jpg'
-import '../styles/profile.css';
+import '../styles/Recipe.css';
 import time from '../styles/img/time.png'
 import location from '../styles/img/location.png'
 
 
 
-class Profile extends Component {
+class Recipe extends Component {
   render() {
     return (
     <div className="topSpace">
@@ -120,4 +120,4 @@ class Profile extends Component {
 }
 
 
-export default Profile;
+export default Recipe;

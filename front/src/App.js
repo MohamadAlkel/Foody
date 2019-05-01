@@ -1,7 +1,7 @@
 
 import './styles/navbar.css';
 import Logo from './styles/img/logos.png'
-import Profile_img from './styles/img/profile.png'
+import Recipe_img from './styles/img/profile.png'
 import work from './styles/img/work.png'
 import portfolio from './styles/img/portfolio.png'
 import contact from './styles/img/contact.png'
@@ -11,15 +11,18 @@ import {
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem
+  NavItem,
+  Button
   } from 'reactstrap';
 import React, { Component } from 'react';
 import './App.css';
-import  Profile  from './pages/Profile';
+import  Recipe  from './pages/Recipe';
 import  Ex  from './pages/Ex';
 // import  Contact  from './pages/Contact';
 import  Portfolio  from './pages/Portfolio';
-import Notfound  from "./pages/Notfound"
+import Notfound  from "./pages/Notfound";
+import  Signup  from './pages/Signup';
+import  Login  from './pages/Login';
 import {
   Route,
   NavLink,
@@ -89,20 +92,22 @@ class App extends Component {
                         className="navitem green"
                       > 
                       {/* <img className="imges" src={portfolio} alt="img" /> */}
-                      Profile
+                      Recipe
                       </NavLink>
                     </NavItem>
                     </div>
                     
+                    <Button className="btns" color="success" >Sign in/Sign up</Button>
                   </Nav>
                 </Collapse>
             </Navbar>
         
           <Switch>
-            <Route exact path="/" component={Profile} />
+            <Route exact path="/" component={Recipe} />
             <Route path="/Experience" component={Ex} />
-            {/* <Route path="/Contact" component={Contact} /> */}
             <Route path="/Portfolio" component={Portfolio} />
+            <Route path="/Signup" component={Signup} />
+            <Route path="/Login" component={Login} />
             <Route  component={Notfound} />
           </Switch>
 
