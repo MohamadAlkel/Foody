@@ -11,13 +11,7 @@ const FormRecipe = () =>
     <Form>
     <Row form>
 
-    <FormGroup>
-          <Label for="exampleFile">_Images</Label>
-          <Input type="file" name="file" id="exampleFile" />
-          <FormText color="muted">
-            This is some placeholder block-level.
-          </FormText>
-        </FormGroup>
+   
 
         <Col md={12}>
         <FormGroup>

@@ -21,8 +21,8 @@ import  Ex  from './pages/Ex';
 // import  Contact  from './pages/Contact';
 import  Portfolio  from './pages/Portfolio';
 import Notfound  from "./pages/Notfound";
-import  Signup  from './pages/Signup';
-import  Login  from './pages/Login';
+import  SignupLogin  from './pages/SignupLogin';
+
 import {
   Route,
   NavLink,
@@ -60,7 +60,7 @@ class App extends Component {
             <NavbarBrand href="/">  <img src={Logo} height="35px" alt="img"/> </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse className="" isOpen={this.state.isOpen} navbar>
-                  <Nav className="ml-auto smallnavbar" navbar>
+                  <Nav className="m-auto smallnavbar" navbar>
                     <div className={navbaritem}>
                     <NavItem>
                       <NavLink 
@@ -75,7 +75,7 @@ class App extends Component {
                     <div className={navbaritem}>
                     <NavItem>
                       <NavLink 
-                        to="/Experience"
+                        to="/Favorite"
                         activeClassName="active"
                         className="navitem blue"
                       > 
@@ -87,27 +87,31 @@ class App extends Component {
                     <div className={navbaritem}>
                     <NavItem>
                       <NavLink 
-                        to="/Portfolio"
+                        to="/Profile"
                         activeClassName="active"
                         className="navitem green"
                       > 
                       {/* <img className="imges" src={portfolio} alt="img" /> */}
-                      Recipe
+                      Profile
                       </NavLink>
                     </NavItem>
                     </div>
                     
-                    <Button className="btns" color="success" >Sign in/Sign up</Button>
                   </Nav>
+                  <NavLink 
+                        to="/Account"
+                        activeClassName=""
+                      > 
+                  <Button className="btnSign" color="success" >Log in/Sign up</Button>
+                  </NavLink>
                 </Collapse>
             </Navbar>
         
           <Switch>
             <Route exact path="/" component={Recipe} />
-            <Route path="/Experience" component={Ex} />
-            <Route path="/Portfolio" component={Portfolio} />
-            <Route path="/Signup" component={Signup} />
-            <Route path="/Login" component={Login} />
+            <Route path="/Favorite" component={Ex} />
+            <Route path="/Profile" component={Portfolio} />
+            <Route path="/Account" component={SignupLogin} />
             <Route  component={Notfound} />
           </Switch>
 

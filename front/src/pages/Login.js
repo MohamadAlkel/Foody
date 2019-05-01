@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardTitle, CardText, CardColumns,
   CardSubtitle, CardBody } from 'reactstrap';
 import '../styles/Recipe.css';
+import '../styles/signup.css';
 
   
   
@@ -9,7 +10,7 @@ import '../styles/Recipe.css';
 
     render() {
       return (
-      <div className="topSpace">
+      <div className="topSpace back">
         
       </div>
       )
