@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { Card, CardImg, CardTitle, CardText, CardColumns,
     CardSubtitle, CardBody,  Button,   
      } from 'reactstrap';
-import '../styles/profile.css';
+import '../styles/Recipe.css';
 import '../styles/Portfolio.css';
 import pro from '../styles/img/pro.jpg'
 import time from '../styles/img/time.png'
 import location from '../styles/img/location.png'
+import  AddNew  from '../containers/AddNew';
+import  EditProfile  from '../containers/EditProfile';
 
 
 
 
 
-class Profile extends Component {    
+class Recipe extends Component {    
 
   render() {
     return (
@@ -26,7 +28,7 @@ class Profile extends Component {
                 </div>
                 <p className="username">username</p>
                 <p className="job">work on</p>
-                <Button color="success">Edit Profile</Button><br/>
+                <div color="success"><EditProfile/></div>
                
           </div>
 
@@ -50,7 +52,8 @@ class Profile extends Component {
 
               <p className="topGreen">_ Brief</p>
               <h6 className="textBrief">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</h6>
-              <Button className="btnUser" color="success">Add New Recipe</Button>
+              <div className="btnUser" color="success"><AddNew /></div>
+              
             </div>
           </div>           
         </div>
@@ -165,4 +168,4 @@ class Profile extends Component {
 }
 
 
-export default Profile;
+export default Recipe;
