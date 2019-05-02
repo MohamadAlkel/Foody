@@ -11,7 +11,12 @@ const FormRecipe = () =>
     <Form>
     <Row form>
 
-   
+    <Col md={12}>
+           <FormGroup>
+             <Label for="exampleEmail">_Recipe name</Label>
+            <Input />
+           </FormGroup>
+    </Col>
 
         <Col md={12}>
         <FormGroup>

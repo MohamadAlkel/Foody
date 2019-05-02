@@ -20,6 +20,13 @@ const FormEdit = () =>
           <Label for="exampleText">Brief</Label>
           <Input type="textarea" name="text" id="exampleText" />
         </FormGroup>
+        <FormGroup>
+          <Label for="exampleText">user photo</Label>
+          <Input type="file" name="file" id="exampleFile" />
+          <FormText color="muted">
+            This is some placeholder block-level.
+          </FormText>
+        </FormGroup>
       </Form>   
 
   </>
