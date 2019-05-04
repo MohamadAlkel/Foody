@@ -7,16 +7,50 @@ import '../styles/Portfolio.css';
 import pro from '../styles/img/pro.jpg'
 import time from '../styles/img/time.png'
 import location from '../styles/img/location.png'
+import userImg from '../styles/img/userImg.jpg'
 import  AddNew  from '../containers/AddNew';
 import  EditProfile  from '../containers/EditProfile';
+import  SignupLogin  from './SignupLogin';
+import {Redirect} from "react-router-dom"
 
 
 
 
 
-class Recipe extends Component {    
+class Recipe extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      username:"",
+      work:"",
+      brief:"",
+      photo:userImg,
+    }
+  }
+
+  
+  componentWillMount(){
+    this.setState({
+      username:localStorage.username,
+      work:localStorage.work,
+      
+      brief:localStorage.brief
+    })
+    
+  }
 
   render() {
+    const {username,work, brief, photo}=this.state
+    console.log(localStorage)
+    let props={
+      username,
+      work,
+      brief,
+      photo
+    }
+    
+    if(!username) return (<Redirect to='/Account'/>)
+    
     return (
     <div>
       <div className="profilePage">
@@ -24,11 +58,11 @@ class Recipe extends Component {
           <div className="col-md-3">
               
                 <div className="userPhoto">
-                    <img className="userPhoto"/>
+                    <img className="userPhoto" src={photo}/>
                 </div>
-                <p className="username">username</p>
-                <p className="job">work on</p>
-                <div color="success"><EditProfile/></div>
+                <p className="username">{username}</p>
+                <p className="job">{work}</p>
+                <div color="success"><EditProfile {...props}  /></div>
                
           </div>
 
@@ -51,7 +85,7 @@ class Recipe extends Component {
               </div>
 
               <p className="topGreen">_ Brief</p>
-              <h6 className="textBrief">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</h6>
+              <h6 className="textBrief">{brief}</h6>
               <div className="btnUser" color="success"><AddNew /></div>
               
             </div>

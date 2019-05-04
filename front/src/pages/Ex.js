@@ -5,11 +5,15 @@ import { Card, CardImg, CardTitle, CardText, CardColumns,
 import '../styles/Recipe.css';
 import time from '../styles/img/time.png'
 import location from '../styles/img/location.png'
+import {Redirect} from "react-router-dom"
+
   
   
   export default class Navbars extends React.Component {
 
     render() {
+      if(!localStorage.username) return (<Redirect to='/Account'/>)
+
       return (
       <div className="topSpace">
         <CardColumns className="cardStyle">
