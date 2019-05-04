@@ -91,6 +91,11 @@ clip-path: polygon(84% 0%, 68% 100%, 0% 100%, 0% 0%);
 
 }
 
+.textRed{
+    color: rgb(199, 33, 33);
+    font-size: 14px
+}
+
 .btnLight{
     /* margin-left:20px; */
     color:#fff;

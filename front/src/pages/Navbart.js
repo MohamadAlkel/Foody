@@ -1,10 +1,10 @@
 
-import './styles/navbar.css';
-import Logo from './styles/img/logos.png'
-import Recipe_img from './styles/img/profile.png'
-import work from './styles/img/work.png'
-import portfolio from './styles/img/portfolio.png'
-import contact from './styles/img/contact.png'
+import '../styles/navbar.css';
+import Logo from '../styles/img/logos.png'
+import Recipe_img from '../styles/img/profile.png'
+import work from '../styles/img/work.png'
+import portfolio from '../styles/img/portfolio.png'
+import contact from '../styles/img/contact.png'
 import {
   Collapse,
   Navbar,
@@ -14,15 +14,17 @@ import {
   NavItem,
   Button
   } from 'reactstrap';
+
+
 import React, { Component } from 'react';
-import './App.css';
-import  Recipe  from './pages/Recipe';
-import  Ex  from './pages/Ex';
-// import  Contact  from './pages/Contact';
-import  Portfolio  from './pages/Portfolio';
-import Notfound  from "./pages/Notfound";
-import  SignupLogin  from './pages/SignupLogin';
-import  Logout  from './containers/Logout';
+import '../App.css';
+import  Recipe  from './Recipe';
+import  Ex  from './Ex';
+// import  Contact  from './Contact';
+import  Portfolio  from './Portfolio';
+import Notfound  from "./Notfound";
+import  SignupLogin  from './SignupLogin';
+import  Logout  from '../containers/Logout';
 
 import {
   Route,
@@ -36,7 +38,7 @@ import {
 
 
 
-class App extends Component {
+class Navbart extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,6 +49,10 @@ class App extends Component {
     this.toggle = this.toggle.bind(this);
   }
 
+  componentWillMount(){
+    // window.location.reload();
+
+  }
 
   toggle() {
     this.setState({
@@ -55,17 +61,28 @@ class App extends Component {
     });
   }
 
-
+  logoutHandler = () =>{
+    localStorage.removeItem("JWT")
+    localStorage.removeItem('profile_picute')
+    localStorage.removeItem("user_id")
+    localStorage.removeItem("username")
+    localStorage.removeItem("location")
+    localStorage.removeItem("destination")
+    // this.setState({logout: true})
+    window.location.reload()
+  }
 
   render() {
       let navbaritem = "onenav "
       if(this.state.isOpen){navbaritem += "open"} 
-     
+      // if(this.state.logout === true){return <Redirect to='/Account'/>}
+      console.log(window.location)
+      // window.location.reload();
 
 
     return (
-      <Router>
-        <div className="App">
+      <>
+        <div className="App hhh">
           <Navbar className="navstyle" light expand="xl">
             <NavbarBrand href="/">  <img src={Logo} height="35px" alt="img"/> </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
@@ -108,34 +125,51 @@ class App extends Component {
                     </div>
                     
                   </Nav>
-                  
+                  {/* <Logout/> */}
+                    {/* {this.state.logout} */}
+                  {!<NavLink 
+                        to="/Account"
+                        activeClassName=""
+                        onClick={"window.location.reload()"}
+                      > 
+                  <Button className="btnSign" color="success" ></Button>
+                  </NavLink>?
                   <NavLink 
                         to="/Account"
+                        onClick={this.logoutHandler}
+                        onClick={"window.location.reload()"}
                         activeClassName=""
                       > 
                   <Button className="btnSign" color="success" >Log in/Sign up</Button>
                   </NavLink>:
+                  <NavLink 
+                        to="/Account"
+                        activeClassName=""
+                        onClick={"window.location.reload()"}
+                      > 
+                  <Button className="btnSign" color="success" >Logout</Button>
+                  </NavLink>
                   
+                  }
                   
                 </Collapse>
             </Navbar>
-            
         
-          <Switch>
+          {/* <Switch>
             <Route exact path="/" component={Recipe} />
             <Route path="/Favorite" component={Ex} />
             <Route path="/Profile" component={Portfolio} />
             <Route path="/Account" component={SignupLogin} />
             <Route  component={Notfound} />
-          </Switch>
+          </Switch> */}
 
         </div>
-      </Router>
+      </>
     );
   }
 }
 
-export default App;
+export default Navbart;
 
 
 

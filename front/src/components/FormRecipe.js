@@ -1,7 +1,6 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, Col, FormText , Row} from 'reactstrap';
 import '../styles/Portfolio.css';
-
 import  Country  from './CountrySelector';
 
 
@@ -10,8 +9,6 @@ const FormRecipe = () =>
   <>
     <Form>
     <Row form>
-
-   
 
         <Col md={12}>
         <FormGroup>
@@ -36,7 +33,6 @@ const FormRecipe = () =>
                 id="exampleTime"
                 placeholder="0"
                 min="0" max="9"
-                
             />
             </FormGroup>
 
@@ -51,8 +47,6 @@ const FormRecipe = () =>
             id="exampleTime"
             placeholder="00"
             min="10" max="59"
-            
-            
           />
         </FormGroup>
 
