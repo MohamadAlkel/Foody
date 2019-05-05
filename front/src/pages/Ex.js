@@ -12,7 +12,7 @@ import {Redirect} from "react-router-dom"
   export default class Navbars extends React.Component {
 
     render() {
-      if(!localStorage.username) return (<Redirect to='/Account'/>)
+      if(!localStorage.JWT) return (<Redirect to='/Account'/>)
 
       return (
       <div className="topSpace">

@@ -12,6 +12,8 @@ import  AddNew  from '../containers/AddNew';
 import  EditProfile  from '../containers/EditProfile';
 import  SignupLogin  from './SignupLogin';
 import {Redirect} from "react-router-dom"
+import axios from "axios";
+
 
 
 
@@ -28,16 +30,45 @@ class Recipe extends Component {
     }
   }
 
+
   
   componentWillMount(){
-    this.setState({
-      username:localStorage.username,
-      work:localStorage.work,
-      
-      brief:localStorage.brief
+    axios({
+      url: `http://localhost:5000/api/v1/users/show`,
+      method:"get",          
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("JWT"),
+        // Accept: 'multipart/form-data'
+      }
+      // data: formData
     })
+    .then((response)=> {
+      
+      console.log("resulrt "+ localStorage.JWT)
+      this.setState({
+        username:response.data.user.username,
+        work:response.data.user.work,
+        brief:response.data.user.brief,
+        photo:response.data.user.photo
+      })
+    
+    })
+    .catch(function (error) {
+      console.log(error);
+    });   
+
+  }
+
+
+  update=()=>{
+     debugger
+     
     
   }
+
+ 
+  
+
 
   render() {
     const {username,work, brief, photo}=this.state
@@ -49,7 +80,7 @@ class Recipe extends Component {
       photo
     }
     
-    if(!username) return (<Redirect to='/Account'/>)
+    if(!localStorage.JWT) return (<Redirect to='/Account'/>)
     
     return (
     <div>
@@ -58,11 +89,11 @@ class Recipe extends Component {
           <div className="col-md-3">
               
                 <div className="userPhoto">
-                    <img className="userPhoto" src={photo}/>
+                    <img height="100%" src={photo}/>
                 </div>
                 <p className="username">{username}</p>
                 <p className="job">{work}</p>
-                <div color="success"><EditProfile {...props}  /></div>
+                <div color="success"><EditProfile {...props}  update={this.update}/></div>
                
           </div>
 
