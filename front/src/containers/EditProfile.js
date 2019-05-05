@@ -18,6 +18,7 @@ class EditProfile extends React.Component {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
+   
   }
 
   render() {
@@ -29,7 +30,7 @@ class EditProfile extends React.Component {
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Edit Profile{this.props.username}</ModalHeader>
           {/* <ModalBody> */}
-             <FormEdit  toggle={this.toggle} {...this.props}/>
+             <FormEdit  toggle={this.toggle}  {...this.props}/>
 
           {/* </ModalBody> */}
           {/* <ModalFooter>
