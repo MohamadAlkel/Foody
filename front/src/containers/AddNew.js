@@ -25,13 +25,13 @@ class AddNew extends React.Component {
         <Button color="success" onClick={this.toggle}>Add New Recipe</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Add New Recipe</ModalHeader>
-          <ModalBody>
-          <FormRecipe/>
+          {/* <ModalBody> */}
+          <FormRecipe toggle={this.toggle}/>
 
-          </ModalBody>
-          <ModalFooter>
+          {/* </ModalBody> */}
+          {/* <ModalFooter>
             <Button color="success" onClick={this.toggle}>Add</Button>{' '}
-          </ModalFooter>
+          </ModalFooter> */}
         </Modal>
       </div>
     );

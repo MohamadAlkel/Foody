@@ -50,15 +50,17 @@ def new():
     username= request.form.get('username', None)
     work = request.form.get('work', None)
     brief = request.form.get('brief', None)
+    time = request.form.get("time", None)
 
     
     # breakpoint()
 
     if (request.files):
         photo = request.files['photo']
+        photoName=time+photo.filename
         client = storage.Client()
         bucket = client.get_bucket('foodymhd')
-        myBlob = bucket.blob(photo.filename)
+        myBlob = bucket.blob(photoName)
         myBlob.upload_from_string(photo.read())
 
    

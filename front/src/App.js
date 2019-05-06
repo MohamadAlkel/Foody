@@ -12,7 +12,8 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  Button
+  Button,
+  ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
   } from 'reactstrap';
 import React, { Component } from 'react';
 import './App.css';
@@ -41,10 +42,12 @@ class App extends Component {
     super(props);
     this.state = {
       isOpen: false,
-      logout:localStorage.username
+      logout:localStorage.username,
+      dropdownOpen: false
     };
 
     this.toggle = this.toggle.bind(this);
+    this.toggleBtn = this.toggleBtn.bind(this);
   }
 
 
@@ -53,6 +56,21 @@ class App extends Component {
       isOpen: !this.state.isOpen,
    
     });
+  }
+
+  toggleBtn() {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  }
+
+  logoutHandler = () =>{
+    localStorage.removeItem("JWT")
+    localStorage.removeItem('profile_picute')
+    localStorage.removeItem("user_id")
+    localStorage.removeItem("username")
+    localStorage.removeItem("location")
+    localStorage.removeItem("destination")
   }
 
 
@@ -108,13 +126,29 @@ class App extends Component {
                     </div>
                     
                   </Nav>
-                  
-                  <NavLink 
+
+                  <ButtonDropdown  isOpen={this.state.dropdownOpen} toggle={this.toggleBtn}>
+                    <DropdownToggle color="success" className="btnSign" caret>
+                      Account
+                    </DropdownToggle>
+                    <DropdownMenu>
+
+                    <NavLink 
                         to="/Account"
                         activeClassName=""
                       > 
-                  <Button className="btnSign" color="success" >Log in/Sign up</Button>
-                  </NavLink>:
+                      <DropdownItem >Log in/Sign up</DropdownItem>
+                    </NavLink>
+                      <DropdownItem divider />
+                      <NavLink 
+                        to="/Account"
+                        activeClassName=""
+                      >   
+                      <DropdownItem onClick={this.logoutHandler}>Log out</DropdownItem>
+                    </NavLink>
+                    </DropdownMenu>
+                  </ButtonDropdown>
+                  
                   
                   
                 </Collapse>

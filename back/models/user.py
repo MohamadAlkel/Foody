@@ -5,7 +5,7 @@ import peewee as pw
 
 class User(BaseModel):
     username = pw.CharField(null=True)
-    email = pw.CharField( unique=True)
+    email = pw.CharField(null=True, unique=True)
     password = pw.CharField(null=True)
     photo = pw.CharField(null=True,default='userImg')
     work = pw.CharField(null=True, default='what do you do?')
