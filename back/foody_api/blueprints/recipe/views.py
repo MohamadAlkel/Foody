@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 from models.user import User
 from models.recipe import Recipe
+from models.favorite import Favorite
 from werkzeug.security import generate_password_hash
 from flask_jwt_extended import (
     create_access_token,
@@ -135,21 +136,17 @@ def delele_recipe():
 @jwt_required
 def index_all():
     id = get_jwt_identity()
-    # user = User.get_or_none(User.id == id)
-    # user_id = user.id
-    # breakpoint()
-    recipes = Recipe.select().where(Recipe.user_id != id)
-    
-    # id = get_jwt_identity()
-    # user = User.get_or_none(User.id == id)
-    # cards = Recipe.select().where(Recipe.user_id==user.id)
 
-    # breakpoint()
-
+    favorites = Favorite.select().join(User, on=Favorite.user_id).switch(Favorite).where(Favorite.user_id==id)
+    excluded_chefs = [c.chef_id for c in favorites]
+    recipes = Recipe.select().where((Recipe.user_id != id) & Recipe.user_id.not_in(excluded_chefs))
+   
     return jsonify({
         "status": "success",
         "recipe": [{
             "id":recipe.id,
+            "id_owner":recipe.user.id,
+            "id_user":str(id),
             "name": recipe.name,
             "photo": recipe.photo,
             "countrys": recipe.countrys,
