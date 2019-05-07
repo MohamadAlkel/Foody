@@ -50,15 +50,17 @@ def new():
     username= request.form.get('username', None)
     work = request.form.get('work', None)
     brief = request.form.get('brief', None)
+    time = request.form.get("time", None)
 
     
     # breakpoint()
 
     if (request.files):
         photo = request.files['photo']
+        photoName=time+photo.filename
         client = storage.Client()
         bucket = client.get_bucket('foodymhd')
-        myBlob = bucket.blob(photo.filename)
+        myBlob = bucket.blob(photoName)
         myBlob.upload_from_string(photo.read())
 
    
@@ -112,7 +114,7 @@ def new():
 
 
 
-@users_api_blueprint.route('/new', methods=['POST'])
+@users_api_blueprint.route('/newuser', methods=['POST'])
 def create():
 
     # breakpoint()
@@ -124,7 +126,7 @@ def create():
     email = request.json.get('email', None)
     
     user_password = password
-    hashed_password = generate_password_hash(user_password)
+    # hashed_password = generate_password_hash(user_password)
 
 
     # front_end side will do the validation

@@ -13,6 +13,9 @@ import  EditProfile  from '../containers/EditProfile';
 import  SignupLogin  from './SignupLogin';
 import {Redirect} from "react-router-dom"
 import axios from "axios";
+import Moment from 'react-moment';
+import 'moment-timezone';
+// Moment.globalFormat = 'l   HH:mm ';
 
 
 
@@ -26,13 +29,15 @@ class Recipe extends Component {
       username:"",
       work:"",
       brief:"",
-      photo:userImg,
+      photo:"https://storage.googleapis.com/foodymhd/userImg.jpg",
+      recipes:[]
     }
   }
 
 
   
   componentWillMount(){
+    // to see profile page
     axios({
       url: `http://localhost:5000/api/v1/users/show`,
       method:"get",          
@@ -44,7 +49,7 @@ class Recipe extends Component {
     })
     .then((response)=> {
       
-      console.log("resulrt "+ localStorage.JWT)
+      // console.log("resulrt "+ localStorage.JWT)
       this.setState({
         username:response.data.user.username,
         work:response.data.user.work,
@@ -55,34 +60,83 @@ class Recipe extends Component {
     })
     .catch(function (error) {
       console.log(error);
-    });   
-
-  }
-
-
-  update=()=>{
-     debugger
-     
+    });  
     
+
+
+    // debugger
+    axios({
+      url: `http://localhost:5000/api/v1/recipe/show`,
+      method:"get",          
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("JWT"),
+      }
+ 
+    })
+    .then((response)=> {
+      console.log("resulrt "+ response.data.recipe)
+     
+      console.log("nooooooo" + response.data.recipes)
+      this.setState({recipes:response.data.recipe})
+    })
+    .catch(function (error) {
+      console.log(error);
+    });  
   }
 
- 
+
+  deleteRecipe=(id)=>{
+    debugger
+    // e.preventDefault();
+    const data ={
+      recipe_id: id,
+    }
+
+    axios({
+      url: `http://localhost:5000/api/v1/recipe/delete`,
+      method:"post",          
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("JWT"),
+        // Accept: 'multipart/form-data'
+      },
+      data: data
+    })
+    .then((response)=> {
+      window.location.reload()
+      
+    //  let items = [...this.state.items]
+    //  items.push(response.data.user)
+    //  this.setState({items:items})
+    //  this.setState({showAddItemModel:false})
+    //  this.setState({file_name: response.data.user.file_name})
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
   
+
+  }  
 
 
   render() {
     const {username,work, brief, photo}=this.state
-    console.log(localStorage)
+    console.log("looooo " + this.state.recipes)
     let props={
       username,
       work,
       brief,
       photo
     }
+    // const moment = require('moment');
+
+    // {moment(newMessage.timestamp).format('LT')}
+    // {moment(recipe.time).format('LT')}
     
     if(!localStorage.JWT) return (<Redirect to='/Account'/>)
+    const dateToFormat = new Date('12:59');
     
-    return (
+  return (
     <div>
       <div className="profilePage">
         <div className="row">
@@ -126,104 +180,51 @@ class Recipe extends Component {
 
       <CardColumns className="cardStyle">
 
-        <Card >
-        <div className="warpCard">
-          <div className="colors">
-            <div className="row">
-              <div className=" user">
-                <CardImg top className="userImg"  src={pro} alt="Card image cap" />
-                <div className="userText">
-                  <CardSubtitle className="usernamePost">username</CardSubtitle>
-                  <CardText className="timePost">time.</CardText>
+
+      {
+        this.state.recipes.map(recipe => {
+          return (
+            <Card key={recipe.id}>
+            <div className="warpCard">
+              <div className="colors">
+                <div className="row">
+                  <div className=" user">
+                    <div className="userImg">
+                      <CardImg top  className="userImgtwo" src={recipe.user_photo} alt="Card image cap" />
+                    </div>
+                    <div className="userText">
+                      <CardSubtitle className="usernamePost">{recipe.username}</CardSubtitle>
+                      <CardText className="timePost">
+                         {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(recipe.time)}
+                      </CardText>
+                      <Button className="x" close  onClick={()=>{this.deleteRecipe(recipe.id)}}/>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            
-            <CardImg top width="100%" className="recipeImg" src={pro} alt="Card image cap" />
-            <CardTitle className="info"> <img className="icon" src={time} /> 03:30   <img className="icon" src={location} /> malaysia</CardTitle>
+                
+                <CardImg top width="100%" className="recipeImg" src={recipe.photo} alt="Card image cap" />
+                <CardTitle className="info"> <img className="icon" src={time} /> 0{recipe.hour}:{recipe.sec}   <img className="icon" src={location} /> {recipe.countrys}</CardTitle>
 
-            <div className="row">
-              <a className="cir" href="#" target="_blank">❤</a>
-              <CardTitle className="recipeHead">Foodtext</CardTitle>
-            </div>
-          </div>  
-          
-          <CardBody className="colorsTwo">
-            <div className="insideGreen">
-              <CardTitle className="headGreen">_ Ingredients</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <CardTitle className="headGreen">_ Directions</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-            </div>
-          </CardBody>
-        </div>
-        </Card>
-
-        <Card >
-        <div className="warpCard">
-          <div className="colors">
-            <div className="row">
-              <div className=" user">
-                <CardImg top className="userImg"  src={pro} alt="Card image cap" />
-                <div className="userText">
-                  <CardSubtitle className="usernamePost">username</CardSubtitle>
-                  <CardText className="timePost">time.</CardText>
+                <div className="row">
+                  <a className="cir" href="#" target="_blank">❤</a>
+                  <CardTitle className="recipeHead">{recipe.name}</CardTitle>
                 </div>
-              </div>
-            </div>
-            
-            <CardImg top width="100%" className="recipeImg" src={pro} alt="Card image cap" />
-            <CardTitle className="info"> <img className="icon" src={time} /> 03:30   <img className="icon" src={location} /> malaysia</CardTitle>
-
-            <div className="row">
-              <a className="cir" href="#" target="_blank">❤</a>
-              <CardTitle className="recipeHead">Foodtext</CardTitle>
-            </div>
-          </div>  
-          
-          <CardBody className="colorsTwo">
-            <div className="insideGreen">
-              <CardTitle className="headGreen">_ Ingredients</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <CardTitle className="headGreen">_ Directions</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-            </div>
-          </CardBody>
-        </div>
-        </Card>
-
-        <Card >
-        <div className="warpCard">
-          <div className="colors">
-            <div className="row">
-              <div className=" user">
-                <CardImg top className="userImg"  src={pro} alt="Card image cap" />
-                <div className="userText">
-                  <CardSubtitle className="usernamePost">username</CardSubtitle>
-                  <CardText className="timePost">time.</CardText>
+              </div>  
+              
+              <CardBody className="colorsTwo">
+                <div className="insideGreen">
+                  <CardTitle className="headGreen">_ Ingredients</CardTitle>
+                  <CardText className="textGreen">{recipe.ingredients}</CardText>
+                  <CardTitle className="headGreen">_ Directions</CardTitle>
+                  <CardText className="textGreen">{recipe.directions}</CardText>
                 </div>
-              </div>
+              </CardBody>
             </div>
-            
-            <CardImg top width="100%" className="recipeImg" src={pro} alt="Card image cap" />
-            <CardTitle className="info"> <img className="icon" src={time} /> 03:30   <img className="icon" src={location} /> malaysia</CardTitle>
+          </Card>
+          )
+        })
+      }
 
-            <div className="row">
-              <a className="cir" href="#" target="_blank">❤</a>
-              <CardTitle className="recipeHead">Foodtext</CardTitle>
-            </div>
-          </div>  
-          
-          <CardBody className="colorsTwo">
-            <div className="insideGreen">
-              <CardTitle className="headGreen">_ Ingredients</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <CardTitle className="headGreen">_ Directions</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-            </div>
-          </CardBody>
-        </div>
-        </Card>
         
       </CardColumns>
 

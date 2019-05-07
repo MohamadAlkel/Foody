@@ -6,19 +6,21 @@ import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-countr
 export default class Country extends Component {
   constructor (props) {
     super(props);
-    this.state = { country: '', region: '' };
+    this.state = { 
+      country: ''
+  };
   }
  
   selectCountry (val) {
     this.setState({ country: val });
+    this.props.selectCountry(val)
   }
  
-  selectRegion (val) {
-    this.setState({ region: val });
-  }
+ 
  
   render () {
     const { country, region } = this.state;
+    // console.log("dasvadgdavad " + country)
     return (
       <div>
 
@@ -27,7 +29,10 @@ export default class Country extends Component {
             <CountryDropdown 
             className="form-control"
             value={country}
-            onChange={(val) => this.selectCountry(val)} />
+            
+            // onChange={this.props.onChange}
+            onChange={(val) => this.selectCountry(val)}
+             />
         </FormGroup>
         
       </div>

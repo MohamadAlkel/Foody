@@ -30,28 +30,6 @@ class FormEdit extends React.Component {
     })
   }
 
-  // onFormSubmit = (e) => {
-  //   e.preventDefault()
-  //   let formData = new FormData() // instantiate it
-    
-  //   formData.append('image', this.state.fileUpload, this.state.fileUpload.name)
-
-  //   axios({
-  //     url: 'http://localhost:5000/api/v1/users/imges',
-  //     method: "post", 
-  //     headers: { 
-  //       Authorization: `Bearer ${localStorage.getItem("JWT")}`,
-  //       Accept: 'multipart/form-data'
-  //     },
-  //     data: formData,
-  //   }).then( (response)=>{
-      
-  //     this.fetch_profile_img()
-  //     this.setState({pictuer:response.data.image_url})           
-  //   })
-    
-  // }
-
 
 
   submitHandler = (e) => {
@@ -66,6 +44,7 @@ class FormEdit extends React.Component {
         formData.append('username', this.state.username)
         formData.append('work', this.state.work)
         formData.append('brief', this.state.brief)
+        formData.append('time', Date.now())
 
         // console.log(formData)
         // const data ={

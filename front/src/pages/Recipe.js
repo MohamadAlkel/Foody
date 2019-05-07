@@ -1,117 +1,120 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardTitle, CardText, CardColumns,
-  CardSubtitle, CardBody } from 'reactstrap';
+
   import pro from '../styles/img/pro.jpg'
 import '../styles/Recipe.css';
 import time from '../styles/img/time.png'
 import location from '../styles/img/location.png'
+import { Card, CardImg, CardTitle, CardText, CardColumns,
+  CardSubtitle, CardBody,  Button,   
+   } from 'reactstrap';
+import axios from "axios";
 
 
 
 class Recipe extends Component {
+  constructor(props) {
+    super(props);
+    this.state={
+      recipes:[]
+    }
+  }
+  
+
+
+  componentWillMount(){
+    axios({
+      url: `http://localhost:5000/api/v1/recipe/show/for/all`,
+      method:"get",          
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("JWT"),
+      }
+ 
+    })
+    .then((response)=> {
+
+     
+      this.setState({recipes:response.data.recipe})
+    })
+    .catch(function (error) {
+      console.log(error);
+    });  
+
+    if(!localStorage.JWT){
+      axios({
+        url: `http://localhost:5000/api/v1/recipe/show/all`,
+        method:"get",          
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("JWT"),
+        }
+   
+      })
+      .then((response)=> {
+  
+       
+        this.setState({recipes:response.data.recipe})
+      })
+      .catch(function (error) {
+        console.log(error);
+      });  
+
+    }
+    
+   
+  }
+
+
+
+
+
   render() {
     return (
     <div className="topSpace">
       <CardColumns className="cardStyle">
 
-        <Card >
-        <div className="warpCard">
-          <div className="colors">
-            <div className="row">
-              <div className=" user">
-                <CardImg top className="userImg"  src={pro} alt="Card image cap" />
-                <div className="userText">
-                  <CardSubtitle className="usernamePost">username</CardSubtitle>
-                  <CardText className="timePost">time.</CardText>
+      {
+        this.state.recipes.map(recipe => {
+          return (
+            <Card key={recipe.id}>
+            <div className="warpCard">
+              <div className="colors">
+                <div className="row">
+                  <div className=" user">
+                    <div className="userImg">
+                      <CardImg top  className="userImgtwo" src={recipe.user_photo} alt="Card image cap" />
+                    </div>
+                    <div className="userText">
+                      <CardSubtitle className="usernamePost">{recipe.username}</CardSubtitle>
+                      <CardText className="timePost">
+                         {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(recipe.time)}
+                      </CardText>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            
-            <CardImg top width="100%" className="recipeImg" src={pro} alt="Card image cap" />
-            <CardTitle className="info"> <img className="icon" src={time} /> 03:30   <img className="icon" src={location} /> malaysia</CardTitle>
+                
+                <CardImg top width="100%" className="recipeImg" src={recipe.photo} alt="Card image cap" />
+                <CardTitle className="info"> <img className="icon" src={time} /> 0{recipe.hour}:{recipe.sec}   <img className="icon" src={location} /> {recipe.countrys}</CardTitle>
 
-            <div className="row">
-              <a className="cir" href="#" target="_blank">❤</a>
-              <CardTitle className="recipeHead">Foodtext</CardTitle>
-            </div>
-          </div>  
-          
-          <CardBody className="colorsTwo">
-            <div className="insideGreen">
-              <CardTitle className="headGreen">_ Ingredients</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <CardTitle className="headGreen">_ Directions</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-            </div>
-          </CardBody>
-        </div>
-        </Card>
-
-        <Card >
-        <div className="warpCard">
-          <div className="colors">
-            <div className="row">
-              <div className=" user">
-                <CardImg top className="userImg"  src={pro} alt="Card image cap" />
-                <div className="userText">
-                  <CardSubtitle className="usernamePost">username</CardSubtitle>
-                  <CardText className="timePost">time.</CardText>
+                <div className="row">
+                  <a className="cir" href="#" target="_blank">❤</a>
+                  <CardTitle className="recipeHead">{recipe.name}</CardTitle>
                 </div>
-              </div>
-            </div>
-            
-            <CardImg top width="100%" className="recipeImg" src={pro} alt="Card image cap" />
-            <CardTitle className="info"> <img className="icon" src={time} /> 03:30   <img className="icon" src={location} /> malaysia</CardTitle>
-
-            <div className="row">
-              <a className="cir" href="#" target="_blank">❤</a>
-              <CardTitle className="recipeHead">Foodtext</CardTitle>
-            </div>
-          </div>  
-          
-          <CardBody className="colorsTwo">
-            <div className="insideGreen">
-              <CardTitle className="headGreen">_ Ingredients</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <CardTitle className="headGreen">_ Directions</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-            </div>
-          </CardBody>
-        </div>
-        </Card>
-
-        <Card >
-        <div className="warpCard">
-          <div className="colors">
-            <div className="row">
-              <div className=" user">
-                <CardImg top className="userImg"  src={pro} alt="Card image cap" />
-                <div className="userText">
-                  <CardSubtitle className="usernamePost">username</CardSubtitle>
-                  <CardText className="timePost">time.</CardText>
+              </div>  
+              
+              <CardBody className="colorsTwo">
+                <div className="insideGreen">
+                  <CardTitle className="headGreen">_ Ingredients</CardTitle>
+                  <CardText className="textGreen">{recipe.ingredients}</CardText>
+                  <CardTitle className="headGreen">_ Directions</CardTitle>
+                  <CardText className="textGreen">{recipe.directions}</CardText>
                 </div>
-              </div>
+              </CardBody>
             </div>
-            
-            <CardImg top width="100%" className="recipeImg" src={pro} alt="Card image cap" />
-            <CardTitle className="info"> <img className="icon" src={time} /> 03:30   <img className="icon" src={location} /> malaysia</CardTitle>
+          </Card>
+          )
+        })
+      }
 
-            <div className="row">
-              <a className="cir" href="#" target="_blank">❤</a>
-              <CardTitle className="recipeHead">Foodtext</CardTitle>
-            </div>
-          </div>  
-          
-          <CardBody className="colorsTwo">
-            <div className="insideGreen">
-              <CardTitle className="headGreen">_ Ingredients</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-              <CardTitle className="headGreen">_ Directions</CardTitle>
-              <CardText className="textGreen">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</CardText>
-            </div>
-          </CardBody>
-        </div>
-        </Card>
+       
         
       </CardColumns>
     </div>
