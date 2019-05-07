@@ -56,11 +56,42 @@ class Recipe extends Component {
       .catch(function (error) {
         console.log(error);
       });  
-
     }
-    
-   
   }
+
+
+  addToFavorite=(owner)=>{
+    // debugger
+    // e.preventDefault();
+    const data ={
+      id_owner: owner
+    }
+
+    axios({
+      url: `http://localhost:5000/api/v1/favorite/new`,
+      method:"post",          
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("JWT"),
+        // Accept: 'multipart/form-data'
+      },
+      data: data
+    })
+    .then((response)=> {
+      window.location.reload()
+      
+    //  let items = [...this.state.items]
+    //  items.push(response.data.user)
+    //  this.setState({items:items})
+    //  this.setState({showAddItemModel:false})
+    //  this.setState({file_name: response.data.user.file_name})
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+  }  
+
+
 
 
 
@@ -95,7 +126,7 @@ class Recipe extends Component {
                 <CardTitle className="info"> <img className="icon" src={time} /> 0{recipe.hour}:{recipe.sec}   <img className="icon" src={location} /> {recipe.countrys}</CardTitle>
 
                 <div className="row">
-                  <a className="cir" href="#" target="_blank">❤</a>
+                  <a className="cir" onClick={()=>{this.addToFavorite( recipe.id_owner)}}  >❤</a>
                   <CardTitle className="recipeHead">{recipe.name}</CardTitle>
                 </div>
               </div>  

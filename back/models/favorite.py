@@ -9,6 +9,6 @@ class Favorite(BaseModel):
     # followers
     user = pw.ForeignKeyField(User, backref="user")
     # chef
-    recipe = pw.ForeignKeyField(Recipe, backref="recipe")
+    chef = pw.ForeignKeyField(User, backref="chef")
 
     

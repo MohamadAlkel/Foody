@@ -86,7 +86,7 @@ class Recipe extends Component {
 
 
   deleteRecipe=(id)=>{
-    debugger
+    // debugger
     // e.preventDefault();
     const data ={
       recipe_id: id,
@@ -113,8 +113,6 @@ class Recipe extends Component {
     .catch(function (error) {
       console.log(error);
     });
-
-  
 
   }  
 
