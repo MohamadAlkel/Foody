@@ -114,7 +114,7 @@ def new():
 
 
 
-@users_api_blueprint.route('/new', methods=['POST'])
+@users_api_blueprint.route('/newuser', methods=['POST'])
 def create():
 
     # breakpoint()
@@ -126,7 +126,7 @@ def create():
     email = request.json.get('email', None)
     
     user_password = password
-    hashed_password = generate_password_hash(user_password)
+    # hashed_password = generate_password_hash(user_password)
 
 
     # front_end side will do the validation

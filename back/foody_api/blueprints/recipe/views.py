@@ -109,42 +109,6 @@ def index():
     }), 200
 
 
-    # return jsonify({
-    #     "status": "success",
-    #     "recipes": cards
-    # })
-
-    
-
-# @recipe_api_blueprint.route('/<recipe_id>/show', methods=['GET'])
-# @jwt_required
-# def show_recipe():
-#     id = get_jwt_identity()
-#     # user = User.get_or_none(User.id == id)
-    
-#     # recipe = Recipe.get_or_none(Recipe.user_id  == id)
-
-#     # user_id = user.id
-#     # items = Item.select().where(Item.user_id == user_id)
-#     recipe = Recipe.get_or_none(Recipe.user_id == id)
-
-#     # recipe = Recipe.select().where(Recipe.user_id == id)
-#     # breakpoint()
-
-
-#     return jsonify({
-#         "status": "success",
-#         "recipe": {
-#             # "id":recipe.id,
-#             "name": recipe.name,
-#             "photo": recipe.photo,
-#             "countrys": recipe.countrys,
-#             "ingredients": recipe.ingredients,
-#             "hour": recipe.hour,
-#             "sec": recipe.sec,
-#             "directions": recipe.directions,
-#         } 
-#     }), 200 
 
 @recipe_api_blueprint.route('/delete', methods=['POST'])
 @jwt_required
@@ -165,3 +129,62 @@ def delele_recipe():
     delete.execute()
     # breakpoint()
     return jsonify({"msg":"you removing is successful"}),200
+
+
+@recipe_api_blueprint.route('/show/for/all', methods=['GET'])
+@jwt_required
+def index_all():
+    id = get_jwt_identity()
+    # user = User.get_or_none(User.id == id)
+    # user_id = user.id
+    # breakpoint()
+    recipes = Recipe.select().where(Recipe.user_id != id)
+    
+    # id = get_jwt_identity()
+    # user = User.get_or_none(User.id == id)
+    # cards = Recipe.select().where(Recipe.user_id==user.id)
+
+    # breakpoint()
+
+    return jsonify({
+        "status": "success",
+        "recipe": [{
+            "id":recipe.id,
+            "name": recipe.name,
+            "photo": recipe.photo,
+            "countrys": recipe.countrys,
+            "hour": recipe.hour,
+            "sec": recipe.sec,
+            "directions": recipe.directions,
+            "ingredients": recipe.ingredients,
+            "time": recipe.time,
+            "username": recipe.user.username,
+            "user_photo": recipe.user.photo
+        } for recipe in recipes]
+    }), 200    
+
+
+
+
+@recipe_api_blueprint.route('/show/all', methods=['GET'])
+def index_all_user():
+   
+    recipes = Recipe.select()
+
+
+    return jsonify({
+        "status": "success",
+        "recipe": [{
+            "id":recipe.id,
+            "name": recipe.name,
+            "photo": recipe.photo,
+            "countrys": recipe.countrys,
+            "hour": recipe.hour,
+            "sec": recipe.sec,
+            "directions": recipe.directions,
+            "ingredients": recipe.ingredients,
+            "time": recipe.time,
+            "username": recipe.user.username,
+            "user_photo": recipe.user.photo
+        } for recipe in recipes]
+    }), 200    

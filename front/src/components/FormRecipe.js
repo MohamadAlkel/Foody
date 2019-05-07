@@ -6,7 +6,9 @@ import  Country  from './CountrySelector';
 import axios from "axios";
 
 
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import Moment from 'react-moment';
+import 'moment-timezone';
+Moment.globalFormat = 'L  HH:mm a';
 
 
 // let f =""

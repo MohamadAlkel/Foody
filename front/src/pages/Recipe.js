@@ -23,7 +23,7 @@ class Recipe extends Component {
 
   componentWillMount(){
     axios({
-      url: `http://localhost:5000/api/v1/recipe/show`,
+      url: `http://localhost:5000/api/v1/recipe/show/for/all`,
       method:"get",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -32,13 +32,32 @@ class Recipe extends Component {
     })
     .then((response)=> {
 
-      console.log("resulrt "+ response.data.recipe)
-      console.log("nooooooo" + response.data.recipes)
+     
       this.setState({recipes:response.data.recipe})
     })
     .catch(function (error) {
       console.log(error);
     });  
+
+    if(!localStorage.JWT){
+      axios({
+        url: `http://localhost:5000/api/v1/recipe/show/all`,
+        method:"get",          
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem("JWT"),
+        }
+   
+      })
+      .then((response)=> {
+  
+       
+        this.setState({recipes:response.data.recipe})
+      })
+      .catch(function (error) {
+        console.log(error);
+      });  
+
+    }
     
    
   }
@@ -65,8 +84,9 @@ class Recipe extends Component {
                     </div>
                     <div className="userText">
                       <CardSubtitle className="usernamePost">{recipe.username}</CardSubtitle>
-                      <CardText className="timePost">{recipe.time}</CardText>
-                      <Button className="x" close />
+                      <CardText className="timePost">
+                         {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(recipe.time)}
+                      </CardText>
                     </div>
                   </div>
                 </div>

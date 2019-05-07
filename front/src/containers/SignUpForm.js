@@ -63,7 +63,7 @@ import {Redirect} from "react-router-dom"
           password
         }
         // debugger
-        axios.post(`http://localhost:5000/api/v1/users/new`, data)
+        axios.post(`http://localhost:5000/api/v1/users/newuser`, data)
         .then((response) => {
           console.log(response)
           localStorage.setItem('username', response.data.user.username)

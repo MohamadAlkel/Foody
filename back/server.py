@@ -3,6 +3,7 @@ from flask import Flask
 from models.base_model import db
 from models.user import User
 from models.recipe import Recipe
+from models.favorite import Favorite
 from flask_jwt_extended import (
     JWTManager, jwt_required, create_access_token,
     get_jwt_identity
@@ -24,6 +25,9 @@ app.register_blueprint(users_api_blueprint, url_prefix='/api/v1/users')
 
 from foody_api.blueprints.recipe.views import recipe_api_blueprint
 app.register_blueprint(recipe_api_blueprint, url_prefix='/api/v1/recipe')
+
+from foody_api.blueprints.favorite.views import favorite_api_blueprint
+app.register_blueprint(favorite_api_blueprint, url_prefix='/api/v1/favorite')
 
 @app.before_request 
 def before_request():

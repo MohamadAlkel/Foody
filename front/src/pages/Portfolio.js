@@ -13,6 +13,9 @@ import  EditProfile  from '../containers/EditProfile';
 import  SignupLogin  from './SignupLogin';
 import {Redirect} from "react-router-dom"
 import axios from "axios";
+import Moment from 'react-moment';
+import 'moment-timezone';
+// Moment.globalFormat = 'l   HH:mm ';
 
 
 
@@ -26,7 +29,7 @@ class Recipe extends Component {
       username:"",
       work:"",
       brief:"",
-      photo:userImg,
+      photo:"https://storage.googleapis.com/foodymhd/userImg.jpg",
       recipes:[]
     }
   }
@@ -125,9 +128,13 @@ class Recipe extends Component {
       brief,
       photo
     }
+    // const moment = require('moment');
+
     // {moment(newMessage.timestamp).format('LT')}
+    // {moment(recipe.time).format('LT')}
     
     if(!localStorage.JWT) return (<Redirect to='/Account'/>)
+    const dateToFormat = new Date('12:59');
     
   return (
     <div>
@@ -187,8 +194,10 @@ class Recipe extends Component {
                     </div>
                     <div className="userText">
                       <CardSubtitle className="usernamePost">{recipe.username}</CardSubtitle>
-                      <CardText className="timePost">{recipe.time}</CardText>
-                      <Button className="x" close  onClick={()=>{this.deleteRecipe(recipe.id)}} />
+                      <CardText className="timePost">
+                         {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(recipe.time)}
+                      </CardText>
+                      <Button className="x" close  onClick={()=>{this.deleteRecipe(recipe.id)}}/>
                     </div>
                   </div>
                 </div>
