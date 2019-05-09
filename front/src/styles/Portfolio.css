@@ -64,10 +64,17 @@
     padding: 30px;
     width: 90vw;
     margin:auto;
-    margin-top: 14vh;
+    margin-top: 90px;
 }
 span.readMoreText{
     color: red;
+}
+
+.modelAlert{
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    margin-top: 10vh
 }
 
 .userPhoto{

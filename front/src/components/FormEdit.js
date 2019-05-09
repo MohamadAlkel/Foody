@@ -5,6 +5,18 @@ import axios from "axios";
 
 
 
+const usernameValidate = username => {
+  return /^(?=.{4,20}$)/.test(username)
+}
+
+const workValidate = work => {
+  return /^(?=.{4,}$)/.test(work)
+}
+
+const briefValidate = brief => {
+  return /^(?=.{30,}$)/.test(brief)
+}
+
 
 class FormEdit extends React.Component {
   constructor(props) {
@@ -13,7 +25,10 @@ class FormEdit extends React.Component {
       fileUpload: {},
       username:this.props.username,
       work:this.props.work,
-      brief:this.props.brief
+      brief:this.props.brief,
+      validateUsername: true,
+      validateWork: true,
+      validateBrief: true,
       
     };
 
@@ -38,12 +53,13 @@ class FormEdit extends React.Component {
     // alert('Success');
         e.preventDefault();
         let formData = new FormData() // instantiate it
+        const {fileUpload, username, work, brief}=this.state
       
-        formData.append('photo', this.state.fileUpload, this.state.fileUpload.name)
+        formData.append('photo', fileUpload, fileUpload.name)
         
-        formData.append('username', this.state.username)
-        formData.append('work', this.state.work)
-        formData.append('brief', this.state.brief)
+        formData.append('username', username)
+        formData.append('work', work)
+        formData.append('brief', brief)
         formData.append('time', Date.now())
 
         // console.log(formData)
@@ -55,30 +71,46 @@ class FormEdit extends React.Component {
         //   image: formData
           
         // }
-        
-        axios({
-          url: `http://localhost:5000/api/v1/users/new`,
-          method:"post",          
-          headers: {
-            "Authorization": "Bearer " + localStorage.getItem("JWT"),
-            Accept: 'multipart/form-data'
-          },
-          data: formData
-        })
-        .then((response)=> {
-          window.location.reload()
-          
-        //  let items = [...this.state.items]
-        //  items.push(response.data.user)
-        //  this.setState({items:items})
-        //  this.setState({showAddItemModel:false})
-        //  this.setState({file_name: response.data.user.file_name})
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
 
-        this.props.toggle()
+
+        const validateUsername = usernameValidate(username)
+        const validateWork = workValidate(work)
+        const validateBrief = briefValidate(brief)
+
+        this.setState({ 
+          validateUsername,
+          validateWork,
+          validateBrief,
+       
+        })
+
+        if (validateWork && validateBrief && validateUsername ){
+
+          axios({
+            url: `http://localhost:5000/api/v1/users/new`,
+            method:"post",          
+            headers: {
+              "Authorization": "Bearer " + localStorage.getItem("JWT"),
+              Accept: 'multipart/form-data'
+            },
+            data: formData
+          })
+          .then((response)=> {
+            window.location.reload()
+            
+          //  let items = [...this.state.items]
+          //  items.push(response.data.user)
+          //  this.setState({items:items})
+          //  this.setState({showAddItemModel:false})
+          //  this.setState({file_name: response.data.user.file_name})
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+  
+          this.props.toggle()
+        }
+        
         
     
   }
@@ -87,10 +119,8 @@ class FormEdit extends React.Component {
   
   
   render() {
-    const{username, work, brief} = this.state
-    // this.props.update(username,work, brief)
-    // console.log("lok it here plz " + this.props.getProfile)
-    // console.log("looooook there " + this.state.fileUpload)
+    const{validateWork, validateBrief, validateUsername, username, work, brief} = this.state
+
     return (
   <>
   <ModalBody>
@@ -98,18 +128,25 @@ class FormEdit extends React.Component {
        <FormGroup>
           <Label for="exampleEmail">_username</Label>
           <Input name="username" value={username}  onChange={this.handleEdit}/>
-          {/* <FormFeedback>You will not be able to see this</FormFeedback> */}
-          {/* <FormText>Example help text that remains unchanged.</FormText> */}
+          <div className="textRed ml-2 mt-1" >
+                {!validateUsername?`- Oops! characters long is 4-20`:``}
+          </div>
+       
         </FormGroup>
         <FormGroup>
           <Label for="exampleEmail">_job</Label>
           <Input name="work" value={work} onChange={this.handleEdit} />
-          {/* <FormFeedback valid>Sweet! that name is available</FormFeedback> */}
-          {/* <FormText>Example help text that remains unchanged.</FormText> */}
+          <div className="textRed ml-2 mt-1" >
+                {!validateWork?`- Oops! characters at least 4`:``}
+          </div>
+
         </FormGroup>
         <FormGroup>
           <Label for="exampleText">_Brief</Label>
           <Input name="brief" value={brief} onChange={this.handleEdit} type="textarea"  id="exampleText" />
+          <div className="textRed ml-2 mt-1" >
+                {!validateBrief?`- Oops! characters at least 30`:``}
+          </div>
         </FormGroup>
         <FormGroup>
           <Label for="exampleFile">_Images</Label>
@@ -118,11 +155,7 @@ class FormEdit extends React.Component {
             This is some placeholder block-level.
           </FormText>
         </FormGroup>
-        {/* <FormGroup>
-          <Label for="exampleFile">_Logout</Label><br/>
-          <Logout/>
 
-        </FormGroup> */}
 
 
         

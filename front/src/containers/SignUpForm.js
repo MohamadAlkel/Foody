@@ -13,7 +13,7 @@ import {Redirect} from "react-router-dom"
   }
 
   const validateUsername = username => {
-    return /^(?=.{4,20}$)[a-zA-Z0-9._]/.test(username)
+    return /^(?=.{4,20}$)/.test(username)
   }
 
   const validatePassword = password => {
@@ -112,7 +112,7 @@ import {Redirect} from "react-router-dom"
             <Label for="exampleEmail">Username</Label>
             <Input type="username" name="username" id="exampleEmail" onChange={this.handleChange} placeholder="with a placeholder" />
             <div className="textRed ml-2 mt-1" >
-                {!validateName?`- Oops! characters long least 4-20`:``}
+                {!validateName?`- Oops! characters long at least 4-20`:``}
             </div>
             <div className="textRed ml-2" >
                 {!emptyUsername?`- Your field is empty`:``}
