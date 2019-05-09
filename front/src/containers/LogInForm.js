@@ -60,6 +60,7 @@ import {Redirect} from "react-router-dom"
               this.setState({
                 PasswordIncorrect: true,
                 noEmail: false,
+                
               })
             }else {
               localStorage.setItem('username', response.data.user.username)
