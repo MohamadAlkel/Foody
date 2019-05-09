@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, FormGroup, Label, Input, Col, FormText , Row,  ModalBody, ModalFooter,Button} from 'reactstrap';
+import { Form, FormGroup, Label, Input, Col, FormText , Row,  ModalBody, ModalFooter,Button,ModalHeader,Modal} from 'reactstrap';
 import '../styles/Portfolio.css';
 import  Country  from './CountrySelector';
 // import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
@@ -11,7 +11,19 @@ import 'moment-timezone';
 Moment.globalFormat = 'L  HH:mm a';
 
 
-// let f =""
+
+
+const nameValidate = name => {
+  return /^(?=.{4,12}$)/.test(name)
+}
+
+const ingredientsValidate = ingredients => {
+  return /^(?=.{50,}$)/.test(ingredients)
+}
+
+const directionsValidate = directions => {
+  return /^(?=.{50,}$)/.test(directions)
+}
 
 
 class FormRecipe extends React.Component {
@@ -24,7 +36,11 @@ class FormRecipe extends React.Component {
       ingredients:"",  
       hour:"",
       sec:"",
-      countrys:""    
+      countrys:"",
+      modal: false ,
+      validateIngredent:true,
+      validateName:true,
+      validateDir:true  
     };
   }
 
@@ -71,20 +87,24 @@ class FormRecipe extends React.Component {
         formData.append('time', Date.now())
         
 
-        // console.log(formData)
-        // const data ={
-        //   name: this.state.name,
-        //   tag_parent:this.state.tag_parent,
-        //   tag_children:this.state.tag_children,
-        //   description: this.state.description,
-        //   image: formData
-          
-        // }
         const {name, fileUpload, countrys, ingredients, directions, sec, hour}=this.state
 
-        if (!directions || !ingredients || !countrys || !fileUpload || !sec || !hour || !name ) {
-          alert('Your fields are empty')
-        } else  {
+        const validateName = nameValidate(name)
+        const validateIngredent = ingredientsValidate(ingredients)
+        const validateDir = directionsValidate(directions)
+
+        this.setState({ 
+          validateDir,
+          validateIngredent,
+          validateName,
+       
+        })
+
+        if (!directions || !ingredients || !countrys  || !sec || !hour || !name || !fileUpload.name) {
+          this.setState({
+            modal: true
+          });
+        } else if (validateName && validateIngredent && validateDir){
           axios({
             url: `http://localhost:5000/api/v1/recipe/new`,
             method:"post",          
@@ -135,10 +155,21 @@ class FormRecipe extends React.Component {
         // this.props.toggle()    
     }
 
+    toggle=()=> {
+      this.setState ({
+        modal: false
+      });
+    }
+
 
 
 
   render() {
+    const {
+      validateDir,
+      validateIngredent,
+      validateName,
+    }=this.state
    
     return (
 
@@ -151,15 +182,24 @@ class FormRecipe extends React.Component {
         <FormGroup>
           <Label for="exampleEmail">_Title</Label>
           <Input name="name"  onChange={this.handleEdit}/>
+          <div className="textRed ml-2 mt-1" >
+                {!validateName?`- Oops! characters long is 4-12`:``}
+          </div>
 
         </FormGroup>
         <FormGroup>
           <Label for="exampleText">_Ingredients</Label>
           <Input type="textarea" name="ingredients" onChange={this.handleEdit} id="exampleText" />
+          <div className="textRed ml-2 mt-1" >
+                {!validateIngredent?`- Oops! characters at least 50`:``}
+          </div>
         </FormGroup>
         <FormGroup>
           <Label for="exampleText">_Directions</Label>
           <Input type="textarea" name="directions" onChange={this.handleEdit} id="exampleText" />
+          <div className="textRed ml-2 mt-1" >
+                {!validateDir?`- Oops! characters at least 50`:``}
+          </div>
         </FormGroup>
 
         </Col>
@@ -227,7 +267,18 @@ class FormRecipe extends React.Component {
 
         </Row>
    
-      </Form>   
+      </Form>
+     
+      <Modal isOpen={this.state.modal} toggle={this.toggle} className="modelAlert ">
+        
+        <ModalBody >
+          Your fields are empty. Please file all of them.
+        </ModalBody>
+        <ModalFooter>
+          <Button color="success" className="m-auto"  onClick={this.toggle}>Ok I Understand</Button>
+        </ModalFooter>
+      </Modal>  
+
   </ModalBody>
   </>
 

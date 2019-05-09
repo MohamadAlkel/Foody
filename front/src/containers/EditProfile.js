@@ -28,7 +28,7 @@ class EditProfile extends React.Component {
       <div>
         <Button color="success" onClick={this.toggle}>Edit Profile</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Edit Profile{this.props.username}</ModalHeader>
+          <ModalHeader toggle={this.toggle}>Edit Profile</ModalHeader>
           {/* <ModalBody> */}
              <FormEdit  toggle={this.toggle}  {...this.props}/>
 
