@@ -185,3 +185,29 @@ def index_all_user():
             "user_photo": recipe.user.photo
         } for recipe in recipes]
     }), 200    
+
+
+
+@recipe_api_blueprint.route('/number', methods=['GET'])
+@jwt_required
+def index_number():
+   
+    id = get_jwt_identity()
+    favorites = Favorite.select().join(User, on=Favorite.user_id).switch(Favorite).where(Favorite.user_id==id)
+    following = len([c.chef_id for c in favorites])
+
+    favorites = Favorite.select().join(User, on=Favorite.user_id).switch(Favorite).where(Favorite.chef_id==id)
+    followers = len([c.user_id for c in favorites])
+
+    my_recipes = Recipe.select().where(Recipe.user_id==id)
+    recipes = len([c.id for c in my_recipes])
+
+
+    return jsonify({
+        "status": "success",
+        "number": {
+            "following":following,
+            "followers": followers,
+            "recipes": recipes ,
+        } 
+    }), 200    

@@ -12,6 +12,15 @@ import {Redirect} from "react-router-dom"
     return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email)
   }
 
+  const validateUsername = username => {
+    return /^(?=.{4,20}$)[a-zA-Z0-9._]/.test(username)
+  }
+
+  const validatePassword = password => {
+    return /^(?=.*[0-9]+.*)(?=.*[a-zA-Z]+.*)[0-9a-zA-Z]{6,}$/.test(password)
+  }
+
+
   
   export default class SignUpForm extends React.Component {
     constructor(props) {
@@ -23,6 +32,11 @@ import {Redirect} from "react-router-dom"
           cpassword:"",
           validatedP:true,
           validated:true,
+          emptyEmail:true,
+          emptyUsername:true,
+          emptyPassword:true,
+          validateName:true,
+          validatePass:true,
           login: false
         }
       }
@@ -43,19 +57,23 @@ import {Redirect} from "react-router-dom"
         
         const validatedP = password === cpassword && password && cpassword
         const validated = validateEmail(email) && password && email
+        const emptyEmail = email 
+        const emptyPassword = password
+        const emptyUsername = username
+        const validateName = validateUsername(username)
+        const validatePass = validatePassword(password)
+
         this.setState({ 
           validatedP,
-          validated
+          validated,
+          validateName,
+          emptyEmail,
+          emptyPassword,
+          emptyUsername,
+          validatePass
         })
 
-        if (!email || !password || !cpassword || !username) {
-          alert('Your fields are empty')
-        } else if (validatedP && validated) {
-          alert(`A email was submitted:  ${email}
-          ${password}
-          ${cpassword} !=
-          ${username}
-          ` )
+        if (validatedP && validated && emptyEmail && emptyPassword && emptyUsername) {
           // send Api
           const data ={
           username,
@@ -82,7 +100,7 @@ import {Redirect} from "react-router-dom"
       }
 
     render() {
-        const {showWhat, validated, validatedP,login} = this.state
+        const {emptyEmail, emptyPassword, emptyUsername, validated, validatedP,login, validateName, validatePass} = this.state
         if (login === true){return <Redirect to='/Profile'/>}
        
 
@@ -92,25 +110,40 @@ import {Redirect} from "react-router-dom"
         <Form>
           <FormGroup>
             <Label for="exampleEmail">Username</Label>
-            <Input type="email" name="username" id="exampleEmail" onChange={this.handleChange} placeholder="with a placeholder" />
+            <Input type="username" name="username" id="exampleEmail" onChange={this.handleChange} placeholder="with a placeholder" />
+            <div className="textRed ml-2 mt-1" >
+                {!validateName?`- Oops! characters long least 4-20`:``}
+            </div>
+            <div className="textRed ml-2" >
+                {!emptyUsername?`- Your field is empty`:``}
+            </div>
           </FormGroup>  
           <FormGroup>
             <Label for="exampleEmail">Email address</Label>
             <Input type="email" name="email" id="exampleEmail" onChange={this.handleChange} placeholder="with a placeholder" />
-            <p className="textRed" >
-                {!validated?`Please enter valid email.`:``}
-            </p>
+            <div className="textRed ml-2 mt-1" >
+                {!validated?`- Please enter valid email.`:``}
+            </div>
+            <div className="textRed ml-2" >
+                {!emptyEmail?`- Your field is empty`:``}
+            </div>
           </FormGroup>
           <FormGroup>
             <Label for="examplePassword"> password</Label>
             <Input type="password" name="password" id="examplePassword" onChange={this.handleChange} placeholder="password placeholder" />
+            <div className="textRed ml-2 mt-1" >
+                {!validatePass?`- password must be at least 6 characters & 1 letter & 1 number.`:``}
+            </div>
+            <div className="textRed ml-2" >
+                {!emptyPassword?`- Your field is empty`:``}
+            </div>
           </FormGroup>
           <FormGroup>
             <Label for="examplePassword">Confirm password</Label>
             <Input type="password" name="cpassword" id="examplePassword" onChange={this.handleChange} placeholder="password placeholder" />
-            <p className="textRed" >
-                {!validatedP?`Please enter same password.`:`` }
-            </p>
+            <div className="textRed ml-2 mt-1" >
+                {!validatedP?`- Please enter same password`:``}
+            </div>
           </FormGroup>
           <div className="warpBtn">  
             <Button className="btnLight" onClick={this.handleSignup} >Sign up</Button>

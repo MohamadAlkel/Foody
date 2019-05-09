@@ -136,6 +136,7 @@ class App extends Component {
                     <NavLink 
                         to="/Account"
                         activeClassName=""
+                        className="account"
                       > 
                       <DropdownItem >Log in/Sign up</DropdownItem>
                     </NavLink>
@@ -143,6 +144,7 @@ class App extends Component {
                       <NavLink 
                         to="/Account"
                         activeClassName=""
+                        className="account"
                       >   
                       <DropdownItem onClick={this.logoutHandler}>Log out</DropdownItem>
                     </NavLink>

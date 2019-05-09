@@ -66,6 +66,9 @@
     margin:auto;
     margin-top: 14vh;
 }
+span.readMoreText{
+    color: red;
+}
 
 .userPhoto{
     width: 150px;
