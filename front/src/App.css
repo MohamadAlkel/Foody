@@ -10,6 +10,15 @@
   background-color: red;
 }
 
+.account:hover{
+  text-decoration: none;
+  font-size: 18px;
+  transition: 1000ms;
+}
+
+.account{
+  transition: 1000ms;
+}
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;

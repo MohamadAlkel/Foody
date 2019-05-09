@@ -16,6 +16,7 @@ import axios from "axios";
 import Moment from 'react-moment';
 import 'moment-timezone';
 // Moment.globalFormat = 'l   HH:mm ';
+import ReadMoreAndLess from 'react-read-more-less';
 
 
 
@@ -30,7 +31,10 @@ class Recipe extends Component {
       work:"",
       brief:"",
       photo:"https://storage.googleapis.com/foodymhd/userImg.jpg",
-      recipes:[]
+      recipes:[],
+      following: "",
+      followers: "",
+      recipesNum: ""
     }
   }
 
@@ -81,8 +85,34 @@ class Recipe extends Component {
     })
     .catch(function (error) {
       console.log(error);
+    }); 
+
+
+
+    
+    axios({
+      url: `http://localhost:5000/api/v1/recipe/number`,
+      method:"get",          
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem("JWT"),
+      }
+ 
+    })
+    .then((response)=> {
+       this.setState({
+        following: response.data.number.following,
+        followers: response.data.number.followers,
+        recipesNum: response.data.number.recipes
+       })
+    })
+    .catch(function (error) {
+      console.log(error);
     });  
+
+
   }
+
+
 
 
   deleteRecipe=(id)=>{
@@ -118,7 +148,7 @@ class Recipe extends Component {
 
 
   render() {
-    const {username,work, brief, photo}=this.state
+    const {username,work, brief, photo, recipesNum, followers, following}=this.state
     console.log("looooo " + this.state.recipes)
     let props={
       username,
@@ -154,15 +184,15 @@ class Recipe extends Component {
 
               <div className="row userInfo">
                 <div className="col-sm-4 oneInfo">
-                    <p className="numInfo">220</p>
-                    <p className="aboutInfo">Recipes</p>
+                    <p className="numInfo">{following}</p>
+                    <p className="aboutInfo">Following</p>
                 </div>
                 <div className=" col-sm-4 oneInfo">
-                    <p className="numInfo">220</p>
-                    <p className="aboutInfo">Recipes</p>
+                    <p className="numInfo">{followers}</p>
+                    <p className="aboutInfo">Followers</p>
                 </div>
                 <div className=" col-sm-4 oneInfo">
-                    <p className="numInfo">220</p>
+                    <p className="numInfo">{recipesNum}</p>
                     <p className="aboutInfo">Recipes</p>
                 </div>
               </div>
@@ -214,7 +244,19 @@ class Recipe extends Component {
                   <CardTitle className="headGreen">_ Ingredients</CardTitle>
                   <CardText className="textGreen">{recipe.ingredients}</CardText>
                   <CardTitle className="headGreen">_ Directions</CardTitle>
-                  <CardText className="textGreen">{recipe.directions}</CardText>
+                  <div className="read">
+                    <ReadMoreAndLess
+                        ref={this.ReadMore}
+                        className="read-more-content read"
+                        style="color: rgb(0, 0, 0)"
+                        charLimit={150}
+                        readMoreText="Read more"
+                        readLessText="Read less"
+                    >
+                        {recipe.directions}
+                    </ReadMoreAndLess>
+                  </div>  
+                  {/* <CardText className="textGreen">{recipe.directions}</CardText> */}
                 </div>
               </CardBody>
             </div>

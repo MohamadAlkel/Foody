@@ -46,9 +46,9 @@ def migrate():
 def index():
     return '<h1>Why so easy</h1>'
 
-@app.route('/user/<username>')
-def show(username):
-    return f"Hi {username}"    
+# @app.route('/user/<username>')
+# def show(username):
+#     return f"Hi {username}"    
 
 if __name__ == '__main__': 
    app.run(debug=True)
