@@ -198,5 +198,7 @@ def login():
                 "brief": user.brief
             }
         }), 200
-    else:
-        return jsonify({"msg": "Bad login"}), 404        
+    elif user and not(check_password_hash(user.password, password)):
+        return jsonify({"msg": "no password"}), 200 
+    else :
+        return jsonify({"msg": "bad Login"}), 200    
