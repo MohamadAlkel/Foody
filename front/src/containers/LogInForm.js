@@ -13,7 +13,11 @@ import {Redirect} from "react-router-dom"
       this.state={
         email:"",
         password:"",
-        login:false
+        emptyEmail:true,
+        emptyPassword:true,
+        login:false,
+        PasswordIncorrect:false,
+        noEmail:false
       }
   
     }
@@ -26,21 +30,17 @@ import {Redirect} from "react-router-dom"
 
     handleSubmit= (e)=> {
       e.preventDefault()
-        const { email, password } = this.state
-        
-        // const validatedP = password === cpassword && password && cpassword
-        // const validated = validateEmail(email) && password && email
-        // this.setState({ 
-        //   validatedP,
-        //   validated
-        // })
+        const { email, password} = this.state
 
-        if (!email || !password ) {
-          alert('Your fields are empty')
-        } else  {
-          alert(`A email was submitted:  ${email}
-          ${password}
-          ` )
+        const emptyEmail = email 
+        const emptyPassword = password
+
+        this.setState({ 
+          emptyEmail,
+          emptyPassword,
+        })
+
+        if (emptyEmail && emptyPassword ) {
 
           const data ={
             email: this.state.email,
@@ -50,14 +50,26 @@ import {Redirect} from "react-router-dom"
           axios.post(`http://localhost:5000/api/v1/users/login`, data)
           .then((response)=> {
             // console.log(response.data)
-            localStorage.setItem('username', response.data.user.username)
-            localStorage.setItem('work', response.data.user.work)
-            localStorage.setItem('photo', response.data.user.photo)
-            localStorage.setItem('id', response.data.user.id)
-            localStorage.setItem('brief', response.data.user.brief)
-            localStorage.setItem('JWT', response.data.access_token)
-            this.setState({login:true})
             
+            if(response.data.msg === "bad Login"){ 
+              this.setState({
+                noEmail: true,
+                PasswordIncorrect: false
+              })
+            }else if (response.data.msg === "no password"){
+              this.setState({
+                PasswordIncorrect: true,
+                noEmail: false,
+              })
+            }else {
+              localStorage.setItem('username', response.data.user.username)
+              localStorage.setItem('work', response.data.user.work)
+              localStorage.setItem('photo', response.data.user.photo)
+              localStorage.setItem('id', response.data.user.id)
+              localStorage.setItem('brief', response.data.user.brief)
+              localStorage.setItem('JWT', response.data.access_token)
+              this.setState({login:true})
+            }
           })
           .catch(function (error) {
             console.log(error);
@@ -73,8 +85,9 @@ import {Redirect} from "react-router-dom"
 
 
     render() {
+      const {emptyEmail, emptyPassword, PasswordIncorrect,noEmail} = this.state
       if (this.state.login === true){return <Redirect to='/Profile'/>}
-      // console.log(this.state.password)
+      
       return (
         <>
       
@@ -84,10 +97,22 @@ import {Redirect} from "react-router-dom"
           <FormGroup>
             <Label for="exampleEmail">Email address</Label>
             <Input type="email" name="email" onChange={this.handleLogin} id="exampleEmail" placeholder="with a placeholder" />
+            <div className="textRed ml-2 mt-1" >
+                {noEmail?`- This email is not exist.`:``}
+            </div>
+            <div className="textRed ml-2" >
+                {!emptyEmail?`- Your field is empty`:``}
+            </div>
           </FormGroup>
           <FormGroup>
             <Label for="examplePassword"> password</Label>
             <Input type="password" name="password" onChange={this.handleLogin} id="examplePassword" placeholder="password placeholder" />
+            <div className="textRed ml-2" >
+                {PasswordIncorrect?`- Your password is incorrect.`:``}
+            </div>
+            <div className="textRed ml-2" >
+                {!emptyPassword?`- Your field is empty`:``}
+            </div>
           </FormGroup>
           <div className="warpBtn">  
             <Button className="btnLight" onClick={this.handleSubmit} >Log in</Button>
