@@ -4,10 +4,18 @@ import React, { Component } from 'react';
 import '../styles/Recipe.css';
 import time from '../styles/img/time.png'
 import location from '../styles/img/location.png'
-import { Card, CardImg, CardTitle, CardText, CardColumns,
-  CardSubtitle, CardBody,  Button,   
+import { Card, CardImg, CardTitle, CardText, Label, CardColumns,
+  CardSubtitle, CardBody,  Col, FormGroup, Input  , CustomInput
    } from 'reactstrap';
 import axios from "axios";
+import Add from '../styles/img/add.png'
+import  Country  from '../components/CountrySelector';
+import  InputRange  from '../components/inputRange';
+import '../styles/Portfolio.css';
+import ReadMoreAndLess from 'react-read-more-less';
+
+
+
 
 
 
@@ -15,7 +23,11 @@ class Recipe extends Component {
   constructor(props) {
     super(props);
     this.state={
-      recipes:[]
+      recipes:[],
+      countrys:"",
+      rSelected:[],
+      hour:"",
+      sec:""
     }
   }
   
@@ -59,6 +71,10 @@ class Recipe extends Component {
     }
   }
 
+  onRadioBtnClick = (rSelected)=> {
+    this.setState({ rSelected });
+  }
+
 
   addToFavorite=(owner)=>{
     // debugger
@@ -72,24 +88,63 @@ class Recipe extends Component {
       method:"post",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
-        // Accept: 'multipart/form-data'
       },
       data: data
     })
     .then((response)=> {
       window.location.reload()
       
-    //  let items = [...this.state.items]
-    //  items.push(response.data.user)
-    //  this.setState({items:items})
-    //  this.setState({showAddItemModel:false})
-    //  this.setState({file_name: response.data.user.file_name})
+    
     })
     .catch(function (error) {
       console.log(error);
     });
 
   }  
+
+  selectCountry =(country)=>{
+    // debugger
+    this.setState({
+      countrys:country
+    })
+  }
+
+
+  handleEdit=(e)=>{
+    debugger
+    // this.setState({
+    //   [e.target.name]:e.target.value
+    // })
+
+    let hour = e.target.value
+    let sec = e.target.value
+
+    const data ={
+      hour: e.target.value,
+      sec:e.target.value,
+      country: this.state.countrys
+    }
+    
+    axios({
+      url: `http://localhost:5000/api/v1/recipe/search`,
+      method:"post",          
+      headers: {
+        // "Authorization": "Bearer " + localStorage.getItem("JWT"),
+      },
+      data: data
+    })
+    .then((response)=> {
+      this.setState({recipes:response.data.recipe})
+      
+    
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
+
+  }
+
 
 
 
@@ -98,14 +153,86 @@ class Recipe extends Component {
 
 
   render() {
+    console.log(this.state.countrys)
     return (
     <div className="topSpace">
+
+      <div>
+        <div className="profilePage">
+          <div className="row">
+            <div className="col-md-2"> 
+            <Col md={12} >
+                <Label for="exampleSelect" className="topSearch">Show recipe</Label>
+                <FormGroup>
+                  <CustomInput type="select" id="exampleCustomSelect" name="customSelect">
+                    <option value="">Random</option>
+                    <option>Recently</option>
+                    
+                  </CustomInput>
+                </FormGroup>
+              </Col>
+               
+            </div>
+
+            <div className="borderLeft col-md-5 ">
+              <Col md={12} >
+                <Label for="exampleSelect" className="topSearch">Select country</Label>
+                  <Country name="country" selectCountry={this.selectCountry}  />
+              </Col>
+            </div> 
+
+            <div className="borderLeft col-md-5 ">
+
+                <Label for="exampleSelect" className="topSearch">Max prepare time</Label>
+            <Col md={12}  className="searchItem">
+                <Col md={6}>
+                  <FormGroup  className="searchItem">
+                  <Label className="searchSize topSearch" for="exampleTime">Hours:</Label>
+                  <Input
+                      type="number"
+                      name="hour"
+                      onChange={this.handleEdit}
+                      id="exampleTime"
+                      placeholder="0"
+                      min="0" max="9"
+                  />
+                  </FormGroup>
+
+              </Col>
+              <Col md={6}>
+              <FormGroup  className="searchItem">
+
+                <Label  className="searchSize topSearch" for="exampleTime">Minutes: </Label>
+                <Input
+                  type="number"
+                  name="sec"
+                  onChange={this.handleEdit}
+                  id="exampleTime"
+                  placeholder="00"
+                  min="10" max="59"
+                />
+              </FormGroup>
+
+              </Col>
+              </Col>
+  
+              
+           
+              
+
+            </div>   
+          
+          </div>           
+        </div>
+      </div>
+
+
       <CardColumns className="cardStyle">
 
       {
         this.state.recipes.map(recipe => {
           return (
-            <Card key={recipe.id}>
+            <Card  className="bigCard" key={recipe.id}>
             <div className="warpCard">
               <div className="colors">
                 <div className="row">
@@ -123,10 +250,10 @@ class Recipe extends Component {
                 </div>
                 
                 <CardImg top width="100%" className="recipeImg" src={recipe.photo} alt="Card image cap" />
-                <CardTitle className="info"> <img className="icon" src={time} /> 0{recipe.hour}:{recipe.sec}   <img className="icon" src={location} /> {recipe.countrys}</CardTitle>
+                <CardTitle className="info"> <img className="icon" src={time} /> 0{recipe.hour}:{recipe.sec}   <img className="icon iconSpace" src={location} /> {recipe.countrys}</CardTitle>
 
                 <div className="row">
-                  <a className="cir" onClick={()=>{this.addToFavorite( recipe.id_owner)}}  >❤</a>
+                  <a className="cir" onClick={()=>{this.addToFavorite( recipe.id_owner)}}  ><img src={Add} height="30px"/></a>
                   <CardTitle className="recipeHead">{recipe.name}</CardTitle>
                 </div>
               </div>  
@@ -136,7 +263,18 @@ class Recipe extends Component {
                   <CardTitle className="headGreen">_ Ingredients</CardTitle>
                   <CardText className="textGreen">{recipe.ingredients}</CardText>
                   <CardTitle className="headGreen">_ Directions</CardTitle>
-                  <CardText className="textGreen">{recipe.directions}</CardText>
+                  <div className="read">
+                    <ReadMoreAndLess
+                        ref={this.ReadMore}
+                        className="read-more-content read"
+                        style="color: rgb(0, 0, 0)"
+                        charLimit={150}
+                        readMoreText="Read more"
+                        readLessText="Read less"
+                    >
+                        {recipe.directions}
+                    </ReadMoreAndLess>
+                  </div> 
                 </div>
               </CardBody>
             </div>

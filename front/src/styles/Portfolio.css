@@ -55,6 +55,12 @@
 
 /* ////////////////// here new ////////////////////////0 */
 
+.bigCard{
+    width: 95%;
+    border-radius: 25px;
+    margin-top: 20px
+}
+
 
 .profilePage{
     background-color: #fff;

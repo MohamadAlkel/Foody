@@ -84,6 +84,7 @@
     /* width: 90%; */
     background-color:#00ba51;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1); 
+    border-radius: 25px;
 }
 
 .card{
@@ -116,13 +117,17 @@
     /* margin-top: 2px; */
     margin-right: 3px;
     padding-left: 3px;
-    border-left: 2px solid #00ba51;
+    border-left: 3px solid #00ba51;
+    border-radius: 10px;
     margin-left:10px;
 }
 
+.iconSpace{
+    margin-left: 30px;
+}
+
 .cir{
-  font-size: 24px;
-  color:#fff;
+  /* font-size: 24px; */
   background-color: #00ba51;
   width: 50px;
   height: 50px;
@@ -130,23 +135,40 @@
   margin-top: 4px;
   margin-right: 10px;
   border-radius: 100%;
-  padding-top: 7px;
+  /* padding-top: 7px; */
   text-decoration: none;
+  cursor: pointer;
+  padding-top: 8px;
 }
 
 .cir:hover{
-    font-size: 26px;
-    color:#fff;
-    background-color: #00ba51;
-    width: 50px;
-    height: 50px;
-    margin-left:20px;
-    border-radius: 100%;
-    padding-top: 7px;
-    text-decoration: none;
+    /* font-size: 26px; */
+    background-color: #019e45;
+    transition:  1000ms;
+   
   }
 
-  .cir.active{
+
+  .topSearch{
+      font-size: 20px;
+      color: #00ba51;
+      padding-bottom: 5px;
+      padding-top:10px
+  }
+
+  .searchItem{
+      display: flex;
+      align-items: center
+
+  }
+
+  .searchSize{
+      font-size: 15px;
+      margin-right: 10px;
+      color: #000
+  }
+
+  /* .cir.active{
     font-size: 24px;
     color:#00ba51;
     background-color: #fff;
@@ -156,7 +178,7 @@
     border-radius: 100%;
     padding-top: 7px;
     text-decoration: none;
-  }
+  } */
 
 .recipeHead{
     margin-top: 5px;
@@ -174,12 +196,15 @@
     padding: 16px;
     background-color: #fff;
     border-bottom-left-radius: 70px;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
     
 }
 
 .colorsTwo{
     background-color: #00ba51;
-    border-top-left-radius: 100px;
+    /* border-top-left-radius: 100px; */
+    border-radius: 25px;
     text-align: left;
     color: #fff;
 }
@@ -226,7 +251,7 @@
 
 .userImg{
     height: 54px;
-    width: 54px;
+    width: 70px;
     border-radius:5px;
     /* margin-top: 15px; */
     overflow: hidden;

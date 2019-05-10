@@ -14,3 +14,4 @@ class Recipe(BaseModel):
     hour = pw.IntegerField(null=True)
     sec =  pw.IntegerField(null=True)
     time =  pw.CharField(null=True)
+    prep = pw.DecimalField(null=True)

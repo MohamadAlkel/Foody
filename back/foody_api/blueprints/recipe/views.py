@@ -37,6 +37,11 @@ def new():
     sec = request.form.get('sec', None)
     time = request.form.get('time', None)
 
+    numHour= int(hour)
+    numMin= int(sec)/100
+    prepTime = numHour+numMin
+
+
     photo = request.files['photo']
     photoName=time+photo.filename
     # breakpoint()
@@ -47,7 +52,7 @@ def new():
 
    
     id = get_jwt_identity()
-
+    # breakpoint()
     recipe = Recipe(
         name= name,
         photo=  myBlob.public_url,
@@ -55,6 +60,7 @@ def new():
         ingredients=ingredients,
         hour=hour,
         sec=sec,
+        prep=prepTime,
         countrys=countrys,
         time=time,
         user=id,
@@ -210,4 +216,40 @@ def index_number():
             "followers": followers,
             "recipes": recipes ,
         } 
-    }), 200    
+    }), 200 
+
+
+@recipe_api_blueprint.route('/search', methods=['POST'])
+def show_search():
+
+    hour= request.json.get('hour', None)
+    sec= request.json.get('sec', None)
+    contry= request.json.get('contry', None)
+    # show= request.json.get('show', None)
+    breakpoint()
+
+    numHour= int(hour)
+    numMin= int(sec)/100
+    prepTime = numHour+numMin
+  
+
+    #    recipes = Recipe.select().where((Recipe.user_id != id) & Recipe.user_id.not_in(excluded_chefs))
+
+    recipes = Recipe.select().where((Recipe.countrys == contry)&(Recipe.prep>=prepTime))
+
+    return jsonify({
+        "status": "success",
+        "recipe": [{
+            "id":recipe.id,
+            "name": recipe.name,
+            "photo": recipe.photo,
+            "countrys": recipe.countrys,
+            "hour": recipe.hour,
+            "sec": recipe.sec,
+            "directions": recipe.directions,
+            "ingredients": recipe.ingredients,
+            "time": recipe.time,
+            "username": recipe.user.username,
+            "user_photo": recipe.user.photo
+        } for recipe in recipes]
+    }), 200           

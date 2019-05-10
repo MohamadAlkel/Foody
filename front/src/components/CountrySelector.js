@@ -25,7 +25,7 @@ export default class Country extends Component {
       <div>
 
         <FormGroup>
-            <Label for="exampleSelect">_Select Country</Label>
+            {/* <Label for="exampleSelect">_Select Country</Label> */}
             <CountryDropdown 
             className="form-control"
             value={country}
