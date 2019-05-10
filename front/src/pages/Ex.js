@@ -7,6 +7,9 @@ import time from '../styles/img/time.png'
 import location from '../styles/img/location.png'
 import {Redirect} from "react-router-dom"
 import axios from "axios";
+import Delete from '../styles/img/delete.png'
+import ReadMoreAndLess from 'react-read-more-less';
+
 
 
   
@@ -73,12 +76,29 @@ import axios from "axios";
 
       return (
       <div className="topSpace">
+
+      <div>
+        <div className="profilePage">
+          <div className="row">
+            <div className="col-md-3"> 
+               
+            </div>
+
+            <div className="borderLeft col-md-9">
+
+            </div>  
+          
+          </div>           
+        </div>
+      </div>
+
+
         <CardColumns className="cardStyle">
   
         {
         this.state.recipes.map(recipe => {
           return (
-            <Card key={recipe.id}>
+            <Card  className="bigCard" key={recipe.id}>
             <div className="warpCard">
               <div className="colors">
                 <div className="row">
@@ -96,10 +116,10 @@ import axios from "axios";
                 </div>
                 
                 <CardImg top width="100%" className="recipeImg" src={recipe.photo} alt="Card image cap" />
-                <CardTitle className="info"> <img className="icon" src={time} /> 0{recipe.hour}:{recipe.sec}   <img className="icon" src={location} /> {recipe.countrys}</CardTitle>
+                <CardTitle className="info"> <img className="icon" src={time} /> 0{recipe.hour}:{recipe.sec}   <img className="icon iconSpace"  src={location} /> {recipe.countrys}</CardTitle>
 
                 <div className="row">
-                  <a className="cir" onClick={()=>{this.deleteFromFavorite( recipe.id_owner)}}  >❤</a>
+                  <a className="cir" onClick={()=>{this.deleteFromFavorite( recipe.id_owner)}}  ><img src={Delete} height="30px"/></a>
                   <CardTitle className="recipeHead">{recipe.name}</CardTitle>
                 </div>
               </div>  
@@ -109,7 +129,18 @@ import axios from "axios";
                   <CardTitle className="headGreen">_ Ingredients</CardTitle>
                   <CardText className="textGreen">{recipe.ingredients}</CardText>
                   <CardTitle className="headGreen">_ Directions</CardTitle>
-                  <CardText className="textGreen">{recipe.directions}</CardText>
+                  <div className="read">
+                    <ReadMoreAndLess
+                        ref={this.ReadMore}
+                        className="read-more-content read"
+                        style="color: rgb(0, 0, 0)"
+                        charLimit={150}
+                        readMoreText="Read more"
+                        readLessText="Read less"
+                    >
+                        {recipe.directions}
+                    </ReadMoreAndLess>
+                  </div> 
                 </div>
               </CardBody>
             </div>

@@ -17,6 +17,7 @@ import Moment from 'react-moment';
 import 'moment-timezone';
 // Moment.globalFormat = 'l   HH:mm ';
 import ReadMoreAndLess from 'react-read-more-less';
+import Def from '../styles/img/def.png'
 
 
 
@@ -212,7 +213,7 @@ class Recipe extends Component {
       {
         this.state.recipes.map(recipe => {
           return (
-            <Card key={recipe.id}>
+            <Card className="bigCard" key={recipe.id}>
             <div className="warpCard">
               <div className="colors">
                 <div className="row">
@@ -231,10 +232,10 @@ class Recipe extends Component {
                 </div>
                 
                 <CardImg top width="100%" className="recipeImg" src={recipe.photo} alt="Card image cap" />
-                <CardTitle className="info"> <img className="icon" src={time} /> 0{recipe.hour}:{recipe.sec}   <img className="icon" src={location} /> {recipe.countrys}</CardTitle>
+                <CardTitle className="info"> <img className="icon" src={time} /> 0{recipe.hour}:{recipe.sec}   <img className="icon iconSpace" src={location} /> {recipe.countrys}</CardTitle>
 
                 <div className="row">
-                  <a className="cir" href="#" target="_blank">❤</a>
+                  <a className="cir" href="#" ><img src={Def} height="30px"/></a>
                   <CardTitle className="recipeHead">{recipe.name}</CardTitle>
                 </div>
               </div>  

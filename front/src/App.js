@@ -93,7 +93,7 @@ class App extends Component {
                     <NavItem>
                       <NavLink 
                         exact  to="/"
-                        activeClassName="active"
+                        activeClassName="activeNav"
                         className="navitem" 
                       > 
                       Recipe
@@ -104,7 +104,7 @@ class App extends Component {
                     <NavItem>
                       <NavLink 
                         to="/Favorite"
-                        activeClassName="active"
+                        activeClassName="activeNav"
                         className="navitem blue"
                       > 
                       {/* <img className="imges" src={work} alt="img"/> */}
@@ -116,7 +116,7 @@ class App extends Component {
                     <NavItem>
                       <NavLink 
                         to="/Profile"
-                        activeClassName="active"
+                        activeClassName="activeNav"
                         className="navitem green"
                       > 
                       {/* <img className="imges" src={portfolio} alt="img" /> */}

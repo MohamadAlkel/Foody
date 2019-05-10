@@ -223,7 +223,7 @@ class FormRecipe extends React.Component {
         <Col md={6}>
         <FormGroup >
 
-           <Label  className="size" for="exampleTime">Seconds</Label>
+           <Label  className="size" for="exampleTime">Minutes</Label>
           <Input
             type="number"
             name="sec"
@@ -237,7 +237,7 @@ class FormRecipe extends React.Component {
         </Col>
 
         <Col md={12} >
-
+          <Label for="exampleSelect" >_Select Country</Label>
             <Country name="country" selectCountry={this.selectCountry}  />
         </Col>
 
