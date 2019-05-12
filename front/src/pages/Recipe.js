@@ -8,6 +8,7 @@ import { Card, CardImg, CardTitle, CardText, Label, CardColumns,
 import axios from "axios";
 import Add from '../styles/img/add.png'
 import  Country  from '../components/CountrySelector';
+import  LoaderRecipe  from '../components/LoaderRecipe';
 import '../styles/Portfolio.css';
 import ReadMoreAndLess from 'react-read-more-less';
 
@@ -21,7 +22,8 @@ export default class Recipe extends Component {
       hour:"",
       sec:"",
       status:"",
-      order:""
+      order:"",
+      loaderRecipe: true
     }
   }
 
@@ -35,7 +37,10 @@ export default class Recipe extends Component {
         }
       })
       .then((response)=> {
-        this.setState({recipes:response.data.recipe})
+        this.setState({
+          recipes:response.data.recipe,
+          loaderRecipe: false
+        })
       })
       .catch(function (error) {
         console.log(error);
@@ -49,7 +54,10 @@ export default class Recipe extends Component {
         }
       })
       .then((response)=> {
-        this.setState({recipes:response.data.recipe})
+        this.setState({
+          recipes:response.data.recipe,
+          loaderRecipe: false
+        })
       })
       .catch(function (error) {
         console.log(error);
@@ -177,7 +185,8 @@ export default class Recipe extends Component {
   render() {
     return (
     <div className="topSpace">
-
+    {this.state.loaderRecipe? <LoaderRecipe/>: 
+      <>
         <div className="profilePage">
           <div className="row">
             <div className="col-md-3"> 
@@ -319,6 +328,8 @@ export default class Recipe extends Component {
         }
         
       </CardColumns>
+      </>
+    }
     </div>
     )
   }
