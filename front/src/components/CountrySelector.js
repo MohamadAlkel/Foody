@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input, Col, FormText , Row} from 'reactstrap';
-import { CountryDropdown, RegionDropdown, CountryRegionData } from 'react-country-region-selector';
+import { FormGroup} from 'reactstrap';
+import { CountryDropdown } from 'react-country-region-selector';
  
  
 export default class Country extends Component {
@@ -8,7 +8,7 @@ export default class Country extends Component {
     super(props);
     this.state = { 
       country: ''
-  };
+    };
   }
  
   selectCountry (val) {
@@ -17,25 +17,18 @@ export default class Country extends Component {
   }
  
  
- 
   render () {
-    const { country, region } = this.state;
-    // console.log("dasvadgdavad " + country)
+    const { country} = this.state;
     return (
-      <div>
-
-        <FormGroup>
-            {/* <Label for="exampleSelect">_Select Country</Label> */}
-            <CountryDropdown 
+      <>
+        <FormGroup> 
+          <CountryDropdown 
             className="form-control"
             value={country}
-            
-            // onChange={this.props.onChange}
             onChange={(val) => this.selectCountry(val)}
-             />
+          />
         </FormGroup>
-        
-      </div>
+      </>
     );
   }
 }

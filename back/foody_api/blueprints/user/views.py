@@ -6,10 +6,8 @@ from flask_jwt_extended import (
     get_jwt_identity,
     jwt_required
 )
-# from werkzeug.security import check_password_hash
 from datetime import datetime,timedelta
 from google.cloud import storage
-# from google.cloud import storage
 
 
 
@@ -18,42 +16,41 @@ users_api_blueprint = Blueprint('users_api',
                                 template_folder='templates')
 
 
-@users_api_blueprint.route('/', methods=['GET'])
-def createi():
-    return '<h1>nada</h1>'
 
 
-@users_api_blueprint.route('/show', methods=['GET'])
-@jwt_required
-def show_userProfile():
-    id = get_jwt_identity()
-    user = User.get_or_none(User.id == id)
-    # user_id = user.id
-    # items = Item.select().where(Item.user_id == user_id)
+@users_api_blueprint.route('/show/<user_id>', methods=['GET'])
+def show_userProfile(user_id):
+    user = User.get_or_none(User.id == user_id)
 
-    return jsonify({
+    if user :
+        return jsonify({
+            "status": "success",
+            "user": {
+                "id":user.id,
+                "username": user.username,
+                "photo": user.photo,
+                "work": user.work,
+                "brief": user.brief,
+                "here":"yes"
+            } 
+        }), 200 
+    else:
+        return jsonify({
         "status": "success",
         "user": {
-            "id":user.id,
-            "username": user.username,
-            "photo": user.photo,
-            "work": user.work,
-            "brief": user.brief,
+            "here":"no"
         } 
     }), 200 
+
 
 
 @users_api_blueprint.route('/new', methods=['POST'])
 @jwt_required
 def new():
-
     username= request.form.get('username', None)
     work = request.form.get('work', None)
     brief = request.form.get('brief', None)
     time = request.form.get("time", None)
-
-    
-    # breakpoint()
 
     if (request.files):
         photo = request.files['photo']
@@ -66,22 +63,6 @@ def new():
    
     id = get_jwt_identity()
 
-    # errors=[]
-    # if not name:
-    #     errors.append('name')
-    # # if not file_name:
-    # #     errors.append('file_name')
-    # if not tag_parent:
-    #     errors.append('tag_parent')
-    # if not tag_children:
-    #     errors.append('tag_children')
-    # if not description:
-    #     errors.append('description')
-    # if errors:
-    #     return jsonify({"msg":{"Missing Parameters":[error for error in errors]}}), 400
-
-    # breakpoint() 
-
     user = User.get_or_none(User.id == id)
     user.username = username
 
@@ -91,11 +72,6 @@ def new():
     user.work = work
     user.brief = brief
     user.save()
-
-    # user = User(username= username,photo= myBlob.public_url, work=work,
-    #             brief=brief)
-    # user.save()
-
      
     url_photo = user.photo
     
@@ -116,28 +92,12 @@ def new():
 
 @users_api_blueprint.route('/newuser', methods=['POST'])
 def create():
-
-    # breakpoint()
     if not request.is_json:
         return jsonify({"msg": "Missing JSON in request"}), 400
 
     username = request.json.get('username', None)
     password = request.json.get('password', None)
     email = request.json.get('email', None)
-    
-    user_password = password
-    # hashed_password = generate_password_hash(user_password)
-
-
-    # front_end side will do the validation
-    # pattern_password = '\w{6,}'
-    # result = re.search(pattern_password, user_password)
-    # pattern_email = '[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]'
-    # result_email = re.search(pattern_email,email)
-
-
- 
-
     email_check = User.get_or_none(User.email == email)
     
     if not email_check:
@@ -168,23 +128,13 @@ def login():
     email = request.json.get('email', None)
     password = request.json.get('password', None)
     
-    
-    # errors = []
-    # if not username:
-    #     errors.append("username")
-    # if not password:
-    #     errors.append("password")
-    # if errors:
-    #     return jsonify({"msg": {"Missing parameters":[error for error in errors]}}), 400
 
     user = User.get_or_none(User.email == email)
     if user and check_password_hash(user.password, password):
-        # user.last_login = time
         user.save()
         new_user_id = user.id
         expires = timedelta(days=365)
         access_token = create_access_token(new_user_id, expires_delta=expires)
-
 
         return jsonify({
             "access_token": access_token,

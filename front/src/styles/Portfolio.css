@@ -1,77 +1,19 @@
-.imgCard{
-    height: 200px;
-    overflow: hidden;
-    padding: 10px;
-}
-
-.color{
-    color:#fc6ac1;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    background-color: #25252600;
-    border: 4px solid #252526;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 18px;
-    font-weight: 400;
-    text-align: left;
-}
-
-.btns{
-    display: flex;
-    width: 90%;
-    text-align: center;
-    margin: auto;
-    padding: 5px;
-    justify-content: center;
-    background-color: #fc6ac200;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    border: 3px solid #fc6ac1;
-    transition: 1000ms;    
-}
-
-.btns:hover{
-    border: 3px solid #fc6ac1;
-    background-color: #fc6ac1;
-}
-
-.top{
-    margin-bottom:0;
-    font-size: 22px;
-    font-weight: bold;
-    padding: 0;
-    padding-top: 20px;
-}
-
-.textCard{ 
-    font-size: 18px;
-    border-radius: 5px;
-    color:#fff;
-}
-
-.card-body{
-    padding: 0;
-}
-
-/* ////////////////// here new ////////////////////////0 */
-
 .bigCard{
     width: 95%;
     border-radius: 25px;
     margin-top: 20px
 }
 
-
 .profilePage{
     background-color: #fff;
     border-radius: 25px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /* height: 100px; */
     padding: 30px;
     width: 90vw;
     margin:auto;
     margin-top: 90px;
 }
+
 span.readMoreText{
     color: red;
 }
@@ -103,10 +45,6 @@ span.readMoreText{
     font-size: 18px;
 }
 
-.borderLeft{
-    /* border-right: 2px solid #00ba51; */
-
-}
 
 .brief{
     text-align: left;
@@ -115,7 +53,6 @@ span.readMoreText{
 
 .borderLeft{
     border-left: 2px solid #00ba51;
-
 }
 
 .btnUser{
@@ -132,8 +69,6 @@ span.readMoreText{
     overflow: hidden;
     padding-bottom: 30px
 }
-
-
 
 .topGreen{
     color: #00ba51;

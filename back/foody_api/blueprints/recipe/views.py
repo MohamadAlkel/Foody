@@ -17,14 +17,6 @@ recipe_api_blueprint = Blueprint('recipe_api',
                                 template_folder='templates')
 
 
-# @recipe_api_blueprint.route('/', methods=['GET'])
-# def createi():
-#     return '<h1>lol</h1>'
-
-
-
- 
-
 @recipe_api_blueprint.route('/new', methods=['POST'])
 @jwt_required
 def new():
@@ -44,7 +36,6 @@ def new():
 
     photo = request.files['photo']
     photoName=time+photo.filename
-    # breakpoint()
     client = storage.Client()
     bucket = client.get_bucket('foodymhd')
     myBlob = bucket.blob(photoName)
@@ -52,7 +43,7 @@ def new():
 
    
     id = get_jwt_identity()
-    # breakpoint()
+
     recipe = Recipe(
         name= name,
         photo=  myBlob.public_url,
@@ -84,19 +75,10 @@ def new():
 
 
 
-@recipe_api_blueprint.route('/show', methods=['GET'])
-@jwt_required
-def index():
-    id = get_jwt_identity()
-    user = User.get_or_none(User.id == id)
-    # user_id = user.id
-    recipes = Recipe.select().where(Recipe.user_id == id)
-    
-    # id = get_jwt_identity()
-    # user = User.get_or_none(User.id == id)
-    # cards = Recipe.select().where(Recipe.user_id==user.id)
-
-    # breakpoint()
+@recipe_api_blueprint.route('/show/<user_id>', methods=['GET'])
+def index(user_id):
+    user = User.get_or_none(User.id == user_id)
+    recipes = Recipe.select().where(Recipe.user_id == user_id)
 
     return jsonify({
         "status": "success",
@@ -111,30 +93,23 @@ def index():
             "ingredients": recipe.ingredients,
             "time": recipe.time,
             "username": user.username,
+            "user_id": user.id,
             "user_photo": user.photo
         } for recipe in recipes]
     }), 200
 
 
-
 @recipe_api_blueprint.route('/delete', methods=['POST'])
 @jwt_required
 def delele_recipe():
-
-    # breakpoint()
     id= get_jwt_identity()
     recipe_id= request.json.get('recipe_id', None)
-
 
     user= User.get_or_none(User.id==id)
     recipe= Recipe.get_or_none(Recipe.id == recipe_id)
 
-
-    # wishlistDelete = Wishlist.delete().where(Wishlist.item_id==item.id)
-    # wishlistDelete.execute()
     delete= Recipe.delete().where(Recipe.user_id == user.id , Recipe.id == recipe.id)
     delete.execute()
-    # breakpoint()
     return jsonify({"msg":"you removing is successful"}),200
 
 
@@ -162,6 +137,7 @@ def index_all():
             "ingredients": recipe.ingredients,
             "time": recipe.time,
             "username": recipe.user.username,
+            "user_id": recipe.user.id,
             "user_photo": recipe.user.photo
         } for recipe in recipes]
     }), 200    
@@ -171,9 +147,7 @@ def index_all():
 
 @recipe_api_blueprint.route('/show/all', methods=['GET'])
 def index_all_user():
-   
     recipes = Recipe.select()
-
 
     return jsonify({
         "status": "success",
@@ -188,26 +162,24 @@ def index_all_user():
             "ingredients": recipe.ingredients,
             "time": recipe.time,
             "username": recipe.user.username,
+            "user_id": recipe.user.id,
             "user_photo": recipe.user.photo
         } for recipe in recipes]
     }), 200    
 
 
 
-@recipe_api_blueprint.route('/number', methods=['GET'])
-@jwt_required
-def index_number():
+@recipe_api_blueprint.route('/number/<user_id_param>', methods=['GET'])
+def index_number(user_id_param):
    
-    id = get_jwt_identity()
-    favorites = Favorite.select().join(User, on=Favorite.user_id).switch(Favorite).where(Favorite.user_id==id)
+    favorites = Favorite.select().join(User, on=Favorite.user_id).switch(Favorite).where(Favorite.user_id==user_id_param)
     following = len([c.chef_id for c in favorites])
 
-    favorites = Favorite.select().join(User, on=Favorite.user_id).switch(Favorite).where(Favorite.chef_id==id)
+    favorites = Favorite.select().join(User, on=Favorite.user_id).switch(Favorite).where(Favorite.chef_id==user_id_param)
     followers = len([c.user_id for c in favorites])
 
-    my_recipes = Recipe.select().where(Recipe.user_id==id)
+    my_recipes = Recipe.select().where(Recipe.user_id==user_id_param)
     recipes = len([c.id for c in my_recipes])
-
 
     return jsonify({
         "status": "success",
@@ -219,37 +191,116 @@ def index_number():
     }), 200 
 
 
-@recipe_api_blueprint.route('/search', methods=['POST'])
+@recipe_api_blueprint.route('/search', methods=['GET'])
+@jwt_required
 def show_search():
+    id = get_jwt_identity()
+    favorites = Favorite.select().join(User, on=Favorite.user_id).switch(Favorite).where(Favorite.user_id==id)
+    excluded_chefs = [c.chef_id for c in favorites]
 
-    hour= request.json.get('hour', None)
-    sec= request.json.get('sec', None)
-    contry= request.json.get('contry', None)
-    # show= request.json.get('show', None)
-    breakpoint()
+    hour= request.args.get('hour')
+    sec= request.args.get('sec')
+    country= request.args.get('country')
+    order= request.args.get('order')
 
-    numHour= int(hour)
-    numMin= int(sec)/100
-    prepTime = numHour+numMin
-  
+    if order == "Time to prepare":
+       ooo =Recipe.prep
+    elif order == "":   
+       ooo =Recipe
+    elif order == "Recently":   
+       ooo =Recipe.created_at.desc()  
 
-    #    recipes = Recipe.select().where((Recipe.user_id != id) & Recipe.user_id.not_in(excluded_chefs))
+    prepTime = None
+    if sec and hour:  
+        prepTime = int(hour) + (int(sec) / 100)
+    elif sec:
+        prepTime = (int(sec) / 100)
+    elif hour:
+        prepTime = int(hour)
+        
+    recipes = False
+    if country and prepTime:
+        recipes = Recipe.select().where((Recipe.countrys == country) & (Recipe.user_id != id) & (Recipe.prep <= prepTime)& Recipe.user_id.not_in(excluded_chefs)).order_by(ooo)
+    elif country:
+         recipes = Recipe.select().where((Recipe.countrys == country)& (Recipe.user_id != id) & Recipe.user_id.not_in(excluded_chefs)).order_by(ooo)
+    elif prepTime:
+         recipes = Recipe.select().where((Recipe.prep <= prepTime)& (Recipe.user_id != id) & Recipe.user_id.not_in(excluded_chefs)).order_by(ooo)
+    else:
+        recipes = Recipe.select().where((Recipe.user_id != id) & Recipe.user_id.not_in(excluded_chefs)).order_by(ooo)
+    
+    if recipes:
+        return jsonify({
+            "status": "success",
+            "recipe": [{
+                "id":recipe.id,
+                "name": recipe.name,
+                "photo": recipe.photo,
+                "countrys": recipe.countrys,
+                "hour": recipe.hour,
+                "sec": recipe.sec,
+                "directions": recipe.directions,
+                "ingredients": recipe.ingredients,
+                "time": recipe.time,
+                "username": recipe.user.username,
+                "user_id": recipe.user.id,
+                "user_photo": recipe.user.photo
+            } for recipe in recipes]
+        }), 200
+    else:
+        return jsonify({"recipe": [], "status": "no recipe"}), 200       
 
-    recipes = Recipe.select().where((Recipe.countrys == contry)&(Recipe.prep>=prepTime))
 
-    return jsonify({
-        "status": "success",
-        "recipe": [{
-            "id":recipe.id,
-            "name": recipe.name,
-            "photo": recipe.photo,
-            "countrys": recipe.countrys,
-            "hour": recipe.hour,
-            "sec": recipe.sec,
-            "directions": recipe.directions,
-            "ingredients": recipe.ingredients,
-            "time": recipe.time,
-            "username": recipe.user.username,
-            "user_photo": recipe.user.photo
-        } for recipe in recipes]
-    }), 200           
+
+
+@recipe_api_blueprint.route('/search/all', methods=['GET'])
+def show_search_all():
+    hour= request.args.get('hour')
+    sec= request.args.get('sec')
+    country= request.args.get('country')
+    order= request.args.get('order')
+
+    if order == "Time to prepare":
+       ooo =Recipe.prep
+    elif order == "":   
+       ooo =Recipe
+    elif order == "Recently":   
+       ooo =Recipe.created_at.desc()  
+
+    prepTime = None
+    if sec and hour:  
+        prepTime = int(hour) + (int(sec) / 100)
+    elif sec:
+        prepTime = (int(sec) / 100)
+    elif hour:
+        prepTime = int(hour)
+        
+    recipes = False
+    if country and prepTime:
+        recipes = Recipe.select().where((Recipe.countrys == country) & (Recipe.prep <= prepTime)).order_by(ooo)
+    elif country:
+         recipes = Recipe.select().where((Recipe.countrys == country)).order_by(ooo)
+    elif prepTime:
+         recipes = Recipe.select().where((Recipe.prep <= prepTime)).order_by(ooo)
+    else:
+        recipes = Recipe.select().order_by(ooo)
+        
+    if recipes:
+        return jsonify({
+            "status": "success",
+            "recipe": [{
+                "id":recipe.id,
+                "name": recipe.name,
+                "photo": recipe.photo,
+                "countrys": recipe.countrys,
+                "hour": recipe.hour,
+                "sec": recipe.sec,
+                "directions": recipe.directions,
+                "ingredients": recipe.ingredients,
+                "time": recipe.time,
+                "username": recipe.user.username,
+                "user_id": recipe.user.id,
+                "user_photo": recipe.user.photo
+            } for recipe in recipes]
+        }), 200
+    else:
+        return jsonify({"recipe": [], "status": "no recipe"}), 200              

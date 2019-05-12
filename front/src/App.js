@@ -1,10 +1,6 @@
 
 import './styles/navbar.css';
 import Logo from './styles/img/logos.png'
-import Recipe_img from './styles/img/profile.png'
-import work from './styles/img/work.png'
-import portfolio from './styles/img/portfolio.png'
-import contact from './styles/img/contact.png'
 import {
   Collapse,
   Navbar,
@@ -12,26 +8,20 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  Button,
   ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
   } from 'reactstrap';
 import React, { Component } from 'react';
 import './App.css';
 import  Recipe  from './pages/Recipe';
 import  Ex  from './pages/Ex';
-// import  Contact  from './pages/Contact';
 import  Portfolio  from './pages/Portfolio';
 import Notfound  from "./pages/Notfound";
 import  SignupLogin  from './pages/SignupLogin';
-import  Logout  from './containers/Logout';
-
 import {
   Route,
   NavLink,
   BrowserRouter as Router,
   Switch,
-  Redirect,
-  Link
 } from 'react-router-dom'
 
 
@@ -54,7 +44,6 @@ class App extends Component {
   toggle() {
     this.setState({
       isOpen: !this.state.isOpen,
-   
     });
   }
 
@@ -67,20 +56,20 @@ class App extends Component {
   logoutHandler = () =>{
     localStorage.removeItem("JWT")
     localStorage.removeItem('profile_picute')
-    localStorage.removeItem("user_id")
+    localStorage.removeItem("id")
     localStorage.removeItem("username")
     localStorage.removeItem("location")
     localStorage.removeItem("destination")
   }
 
+  onClickGo =()=>{
+    window.location.href = `${window.location.origin}/Profile/${localStorage.id}`
+  }
 
 
   render() {
       let navbaritem = "onenav "
       if(this.state.isOpen){navbaritem += "open"} 
-     
-
-
     return (
       <Router>
         <div className="App">
@@ -107,7 +96,6 @@ class App extends Component {
                         activeClassName="activeNav"
                         className="navitem blue"
                       > 
-                      {/* <img className="imges" src={work} alt="img"/> */}
                       Favorite
                       </NavLink>
                     </NavItem>
@@ -115,11 +103,11 @@ class App extends Component {
                     <div className={navbaritem}>
                     <NavItem>
                       <NavLink 
-                        to="/Profile"
+                        onClick={this.onClickGo}
+                        to={`/Profile/${localStorage.id}`}
                         activeClassName="activeNav"
                         className="navitem green"
                       > 
-                      {/* <img className="imges" src={portfolio} alt="img" /> */}
                       Profile
                       </NavLink>
                     </NavItem>
@@ -160,7 +148,7 @@ class App extends Component {
           <Switch>
             <Route exact path="/" component={Recipe} />
             <Route path="/Favorite" component={Ex} />
-            <Route path="/Profile" component={Portfolio} />
+            <Route path="/Profile/:id" component={Portfolio} />
             <Route path="/Account" component={SignupLogin} />
             <Route  component={Notfound} />
           </Switch>
