@@ -13,6 +13,8 @@ import axios from "axios";
 import 'moment-timezone';
 import ReadMoreAndLess from 'react-read-more-less';
 import Def from '../styles/img/def.png'
+import  LoaderProfile  from '../components/LoaderProfile';
+
 
 
 export default class Recipe extends Component {
@@ -27,7 +29,8 @@ export default class Recipe extends Component {
       following: "",
       followers: "",
       recipesNum: "",
-      here:""
+      here:"",
+      loaderProfile: true
     }
   }
 
@@ -51,6 +54,7 @@ export default class Recipe extends Component {
         brief:response.data.user.brief,
         photo:response.data.user.photo,
         here:response.data.user.here,
+        
       })
     })
     .catch(function (error) {
@@ -65,7 +69,10 @@ export default class Recipe extends Component {
       }
     })
     .then((response)=> {
-      this.setState({recipes:response.data.recipe})
+      this.setState({
+        recipes:response.data.recipe,
+        loaderProfile: false
+      })
     })
     .catch(function (error) {
       console.log(error);
@@ -124,6 +131,9 @@ export default class Recipe extends Component {
     if(this.state.here === "no") return (<Redirect to='/no_user'/>)
   return (
     <>
+     {this.state.loaderProfile? <LoaderProfile/>:
+      <>
+     
       <div className="profilePage">
 
         <div className="row">
@@ -236,6 +246,8 @@ export default class Recipe extends Component {
         }
 
       </CardColumns>
+      </>
+     }
     </>
     )
   }

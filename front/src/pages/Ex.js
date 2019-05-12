@@ -10,6 +10,7 @@ import axios from "axios";
 import Delete from '../styles/img/delete.png'
 import ReadMoreAndLess from 'react-read-more-less';
 import  Country  from '../components/CountrySelector';
+import  LoaderRecipe  from '../components/LoaderRecipe';
 
   
 export default class Navbars extends React.Component {
@@ -21,7 +22,8 @@ export default class Navbars extends React.Component {
       countrys:"",
       sec:"",
       status:"",
-      order:""
+      order:"",
+      loaderRecipe: true
     }
   }
 
@@ -35,7 +37,10 @@ export default class Navbars extends React.Component {
       }
     })
     .then((response)=> {   
-      this.setState({recipes:response.data.recipe})
+      this.setState({
+        recipes:response.data.recipe,
+        loaderRecipe: false
+      })
     })
     .catch(function (error) {
       console.log(error);
@@ -168,6 +173,8 @@ export default class Navbars extends React.Component {
     if(!localStorage.JWT) return (<Redirect to='/Account'/>)
     return (
       <div className="topSpace">
+      {this.state.loaderRecipe? <LoaderRecipe/>:
+        <>
 
         <div>
           <div className="profilePage">
@@ -311,6 +318,8 @@ export default class Navbars extends React.Component {
           }
       
         </CardColumns>
+      </>
+      }
       </div>
     )
   }
