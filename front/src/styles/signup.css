@@ -1,6 +1,6 @@
 .back{
--webkit-clip-path: ellipse(16% 85% at 0% 14%);
-clip-path: ellipse(16% 85% at 0% 14%);
+    -webkit-clip-path: ellipse(16% 85% at 0% 14%);
+    clip-path: ellipse(16% 85% at 0% 14%);
     width:100%;
     height:100vh;
     background-color:#14984d52;
@@ -10,33 +10,18 @@ clip-path: ellipse(16% 85% at 0% 14%);
 
 .backOne{
     -webkit-clip-path: ellipse(25% 85% at 0% 14%);
-clip-path: ellipse(25% 85% at 0% 14%);
-        width:100%;
-        height:100vh;
-        background-color:#1cad5b;
-        position: absolute;
-        top:0;
-    }
-
-/* .backTwo{
-    -webkit-clip-path: polygon(84% 0%, 68% 100%, 0% 100%, 0% 0%);
-clip-path: polygon(84% 0%, 68% 100%, 0% 100%, 0% 0%);
-
-        width:100%;
-        height:10vh;
-        background-color:#00ba51;
-        position: absolute;
-        top:0;
-    } */
-
-
+    clip-path: ellipse(25% 85% at 0% 14%);
+    width:100%;
+    height:100vh;
+    background-color:#1cad5b;
+    position: absolute;
+    top:0;
+}
 
 .signupHead{
     text-align: center;
     font-size: 40px;
     font-weight: bold;
-    /* margin-top: 10vh */
-
 }
 
 .leftSignWelcome{
@@ -47,7 +32,7 @@ clip-path: polygon(84% 0%, 68% 100%, 0% 100%, 0% 0%);
     font-weight: bold;
     text-align: left;
     color: white;
-  text-shadow: 2px 2px 4px #000000;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 .leftSign{
@@ -58,7 +43,7 @@ clip-path: polygon(84% 0%, 68% 100%, 0% 100%, 0% 0%);
     font-weight: bold;
     text-align: left;
     color: white;
-  text-shadow: 2px 2px 4px #000000;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 .leftSignTwo{
@@ -70,7 +55,7 @@ clip-path: polygon(84% 0%, 68% 100%, 0% 100%, 0% 0%);
     text-align: left;
     margin-left: 20px;
     color: white;
-  text-shadow: 2px 2px 4px #000000;
+    text-shadow: 2px 2px 4px #000000;
 }
 
 .warpForm{
@@ -82,13 +67,11 @@ clip-path: polygon(84% 0%, 68% 100%, 0% 100%, 0% 0%);
     text-align: left;
     color:#fff;
     margin-bottom: 10px;
-
 }
 
 .warpBtn{
     display: flex;
     justify-content: space-between;
-
 }
 
 .textRed{
@@ -97,7 +80,6 @@ clip-path: polygon(84% 0%, 68% 100%, 0% 100%, 0% 0%);
 }
 
 .btnLight{
-    /* margin-left:20px; */
     color:#fff;
     border: 2px solid #fff;
     background-color: #1cad5b00;
@@ -105,10 +87,8 @@ clip-path: polygon(84% 0%, 68% 100%, 0% 100%, 0% 0%);
 }
 
 .btnLight:hover{
-    /* margin-left:20px; */
     color:#00ba51;
     border: 2px solid #fff;
     background-color: #fff;
-    /* font-weight: bold; */
 }
 

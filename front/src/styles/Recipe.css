@@ -1,87 +1,8 @@
-.greeting {
-    font-size : 50px;
-    color: #fff;
-    font-weight: bold;
-    font-family: arial;
-    padding-left: 5vw;
-    padding-top:80px;
-    text-align: start;
-}
-
 .topSpace  {
     margin-top: 90px
 }
 
-.text {
-    line-height: 1.4;
-    color: #fff;
-    font-size: 18px;
-    letter-spacing: 1px;
-    /* margin-top: 5px; */
-    margin-left: 35px;
-    /* font-weight: 200; */
-    margin-bottom: 35px;
-}
-
-.profiles {
-    color: #fff;
-    text-align: start;
-    border-left: 3px solid #d67332;
-    margin-top: 70px;
-    font-weight: bold;
-    font-family: arial;
-    padding-left: 5vw;
-    padding-top:40px;
-    font-size: 70px;
-} 
-
-.oring {
-    color: #d67332;
-}
-
-.file {
-    color: #d67332;
-    font-size: 40px;
-    font-weight: bold;   
-}
-
-.attribute{
-    text-decoration: none;
-    color: #d67332;
-}
-
-.attribute:hover{
-    text-decoration: none;
-    color: #38373d;
-}
-
-.button {
-    padding: 8px 35px;
-    font-weight: bold;
-    margin-top: 20px;
-    margin-left: 5vw;
-    text-align: start;
-    border: 3px solid #d67332;
-    border-radius: 8px;
-    background-color: transparent;
-    font-size : 20px;
-    color: #d67332;
-    margin-bottom: 40px;
-    font-family: arial;
-    display: flex;
-    transition:  1000ms;
-}  
-
-.button:hover {
-    background-color: #d67332;
-    color: #38373d;
-}  
-
-/* ///////////////////////////////start here ///////////////////////// */
-
 .warpCard{
-    /* width: 90%; */
-    /* width: 90%; */
     background-color:#00ba51;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1); 
     border-radius: 25px;
@@ -89,7 +10,6 @@
 
 .card{
     margin-bottom: 10px;
-
 }
 
 .warpCard:hover{
@@ -99,8 +19,6 @@
 
 .recipeImg{
     border-radius:10px;
-    /* padding-bottom: 20px; */
-    /* padding-top: 20px; */
 }
 
 .info{
@@ -109,12 +27,10 @@
     text-align: left;
     color: #212529;
     margin-top: 5px;
-
 }
 
 .icon{
     height:28px;
-    /* margin-top: 2px; */
     margin-right: 3px;
     padding-left: 3px;
     border-left: 3px solid #00ba51;
@@ -127,7 +43,6 @@
 }
 
 .cir{
-  /* font-size: 24px; */
   background-color: #00ba51;
   width: 50px;
   height: 50px;
@@ -135,50 +50,42 @@
   margin-top: 4px;
   margin-right: 10px;
   border-radius: 100%;
-  /* padding-top: 7px; */
   text-decoration: none;
   cursor: pointer;
   padding-top: 8px;
 }
 
 .cir:hover{
-    /* font-size: 26px; */
     background-color: #019e45;
     transition:  1000ms;
-   
   }
 
 
-  .topSearch{
-      font-size: 20px;
-      color: #00ba51;
-      padding-bottom: 5px;
-      padding-top:10px
-  }
+.topSearch{
+    font-size: 20px;
+    color: #00ba51;
+    padding-bottom: 5px;
+    padding-top:10px
+}
 
-  .searchItem{
-      display: flex;
-      align-items: center
+.topSearchNum{
+    font-size: 22px;
+    color: #00ba51;
+    padding-bottom: 5px;
+    padding-top:10px;
+    font-weight: bold
+}
 
-  }
+.searchItem{
+    display: flex;
+    align-items: center
+}
 
-  .searchSize{
-      font-size: 15px;
-      margin-right: 10px;
-      color: #000
-  }
-
-  /* .cir.active{
-    font-size: 24px;
-    color:#00ba51;
-    background-color: #fff;
-    width: 50px;
-    height: 50px;
-    margin-left:20px;
-    border-radius: 100%;
-    padding-top: 7px;
-    text-decoration: none;
-  } */
+.searchSize{
+    font-size: 15px;
+    margin-right: 10px;
+    color: #000
+}
 
 .recipeHead{
     margin-top: 5px;
@@ -198,12 +105,10 @@
     border-bottom-left-radius: 70px;
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-    
 }
 
 .colorsTwo{
     background-color: #00ba51;
-    /* border-top-left-radius: 100px; */
     border-radius: 25px;
     text-align: left;
     color: #fff;
@@ -211,16 +116,11 @@
 
 .insideGreen{
     padding: 20px;
-
 }
 
 .headGreen{
    font-size:24px;
    font-weight: 400;
-}
-
-.textGreen{
-
 }
 
 .type {
@@ -232,7 +132,6 @@
     text-align: start
 }
 
-
 .images{
     height: 300px;
 }
@@ -242,18 +141,49 @@
     margin: auto;
     margin-bottom:10vh;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
 }
 
 .cardStyle{
     margin: 25px
 }
 
+.notFound {
+    background-color: #fff;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 30px;
+    width: 60vw;
+    margin: auto;
+    margin-top: 30px;
+}
+
+
+.numRecipe {
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 10px;
+    width: 300px;
+    margin: auto;
+    margin-top: 20px;
+    color:rgb(83, 83, 83);
+    font-size: 18px;
+}
+
+.userId{
+    text-decoration: none;
+    color:#000
+}
+
+.userId:hover{
+    text-decoration: none;
+    color:#000
+}
+
 .userImg{
     height: 54px;
     width: 70px;
     border-radius:5px;
-    /* margin-top: 15px; */
     overflow: hidden;
     margin-right: 0;
 }
@@ -262,22 +192,20 @@
     height: 54px;
     width: auto;
     border-radius:5px;
-    /* margin-top: 15px; */
     overflow: hidden;
     margin-right: 0;
 }
 
-
 .user{
     display: flex;
-    margin-bottom:20px
-    
+    margin-bottom:20px 
 }
 
 .userText{
     text-align: left;
     width: 100%;
     padding-left: 14px;
+    padding-top: 5px
 }
 
 .x{
