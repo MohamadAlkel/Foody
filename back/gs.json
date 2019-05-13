@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "foody-239701",
+  "private_key_id": "50347444d1399a3bf70b0d163f3edc21e73bb9b8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC3Gl6nPhNc1d2E\nn3Mu45WAjlyGGO27OR4URr2ljgwe493Htp025FaUfnE+VjGtWio7KqYPYfrdA/bF\neRLzhZsa/v6PVIvINUHkqFlDPaLbwU3lk3u84DgCnNq8ZT54/9vw1vdav77s0bC0\nYTRIyPq90h7yS3EhP8n7QCfeOvqS+JZYSf7KSRP56Vt1u8pqfV/7r3hbBN0rW76J\nDn81/b0+E76zlrbDfCSWJ9OwEU2Beql156kytBcsGg6nc2apsOdwbmiS1+uuJvyU\n5oxLf9siLwF+/60Tz+CMO5EqZT1onmPowK9Gt6rIV5aYDyfebh6kWWRKGqK7zxu0\nRwTRBTLtAgMBAAECggEAJ85QSIx6uiJ2Y3gkmst4O3f3jmGKATtEGkVcwkqUwPxp\nwRqmqAHQ/rxUUyh66URiTPWTH2H+HyFW+ww8vftMQnywC6nmL5LAbfzZVwBl0N9/\n10qOSnv2QT8nYHCkObrp7jxVjwGDeMmHYFeHfdFPjYfKGYOkJwXOm9QRNsNcqSmK\nESp+XGwxhcVUXHFT6b+Ff/p2fUQD7irjDq3ht0TY3o3uPYIPl1z60F6JiiLltDdQ\n5fbaT/2LlhmUMtmZ7RePZgUALcOoHAnNklPlpdEBRhSYWCngFIbmoh1/Ie9LEyZz\nZEUeeWAZWxOiikvVS0CxU+/u0LyUn2OurJocetPzMQKBgQDyBr/RfpsONIRowEO3\nGCrRFAuNtZ1KoI9SM22kR2qPCFJhEmuKqmYxA2HZNMtV5tWqHZJsoaZo57mwf1fj\nK9jk0I+TLk1+QHZWbQ9b7j9dUY+ARHUas7OHLyKgR+4IBz6frCVm3m0IZC4zxJTb\np3SKNPPxL1FXG9jqi29XuhFwqQKBgQDBrLVoWWNwJtHgictVRaEVTAdOuWBBgwxw\neZVibSing5+gGoBm6KkZBYCK4Pb26Qej2wmBVU2eY8OAULNwCaUCEOjLFVKO2sRJ\nQiV56abRZp0kso4W0d3s1hVDFK3CZ1tj/KGO7FQbvESrHzA9n4W4ZVjyw8KGI220\nmY0P8SqmpQKBgQDVXm/jUDuAdXo6Iy5Pj4XH12UsJG2r6gsQS/igOLnPqWV+4M9g\na0M2eKXd6LZOX/gERpfdH1Hm8Et7N3kS9If9iYTaG5sD7+6j2PgOcub37TyWt0OK\nK9zdFAfxyBgoicKC4DAFFZiIKlG1H9ygHWwXoAFjovSR2CIO/KhHbemMKQKBgCPC\nA2xUtKtMP4u5ZTVFOcx40RCT4VW3IGDT0eTuSodDIgGpYvOdGTtpbKY3iuFjfOmf\n001xtnb77GiQfdC9tx1+ibyVHz0I3xy3fbvYi9g1neXcoadM8DB+BkbwVnSCKLl5\nN0rwD0dfpz4A8CMwhLva2mVYB15ExEiH4SeEW1+RAoGBANiI+Ao3FLUYYXlGfoyo\nOoS02cjI8X/surVWUemDu+zwpdonT/Q0075MBPAetiLHneF/FC3ufwY+2T8yOiHS\nqp49akh9MWgIMj5AHcdjpCG0Xx58+ApplKhNa73iBWl8Kglhj0mGcLSD9Tu5EN8w\nJ97tzSmImYZTB6ZzGUL7rbVR\n-----END PRIVATE KEY-----\n",
+  "client_email": "foodykl@foody-239701.iam.gserviceaccount.com",
+  "client_id": "112178237392829769608",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/foodykl%40foody-239701.iam.gserviceaccount.com"
+}
