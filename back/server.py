@@ -9,11 +9,13 @@ from flask_jwt_extended import (
     get_jwt_identity
 )
 from flask_cors import CORS
+from flask import Blueprint, render_template, request, redirect, url_for, flash, Flask,send_from_directory
 
 
 
 
-app = Flask(__name__)
+
+app = Flask(__name__, static_folder='build/static')
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 app.config['JWT_SECRET_KEY'] = 'super-secret'  
@@ -29,6 +31,8 @@ app.register_blueprint(recipe_api_blueprint, url_prefix='/api/v1/recipe')
 from foody_api.blueprints.favorite.views import favorite_api_blueprint
 app.register_blueprint(favorite_api_blueprint, url_prefix='/api/v1/favorite')
 
+
+
 @app.before_request 
 def before_request():
     db.connect()
@@ -43,8 +47,9 @@ def migrate():
    db.evolve(ignore_tables={'base_model'})   
 
 @app.route("/")
-def index():
-    return '<h1>Why so easy</h1>'
+@app.route("/<path:path>")
+def root(path=None):
+    return render_template("index.html")
 
 # @app.route('/user/<username>')
 # def show(username):

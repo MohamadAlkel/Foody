@@ -74,6 +74,7 @@ export default class LogInForm extends Component {
       }
     }
 
+ 
   render() {
     const {emptyEmail, emptyPassword, PasswordIncorrect,noEmail} = this.state
     if (this.state.login === true){return <Redirect to={`/Profile/${localStorage.id}`}/>}
