@@ -21,7 +21,6 @@ def new():
 
     id_owner = request.json.get('id_owner', None)
     id = get_jwt_identity()
-
     favorite = Favorite(
         user= id,
         chef=  id_owner

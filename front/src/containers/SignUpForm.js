@@ -96,7 +96,7 @@ export default class SignUpForm extends React.Component {
       return (
         <>
           <h1 className="signupHead"> SIGN UP</h1>
-          <Form >
+          <Form onSubmit={this.handleSignup}>
             <FormGroup>
               <Label for="username">Username</Label>
               <Input type="username" autoComplete="username " name="username" id="username" onChange={this.handleChange} placeholder="with a placeholder" />
@@ -139,7 +139,7 @@ export default class SignUpForm extends React.Component {
             </FormGroup>
             
             <div className="warpBtn">  
-              <Button className="btnLight" onClick={this.handleSignup} >Sign up</Button>
+              <Button className="btnLight" type="submit" onClick={this.handleSignup} >Sign up</Button>
               <Button className="btnLight" onClick={this.props.showForm} >Go to Log in</Button>
             </div>
           </Form>
