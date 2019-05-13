@@ -80,7 +80,7 @@ export default class LogInForm extends Component {
       return (
         <>
           <h1 className="signupHead"> LOG IN</h1>
-          <Form>
+          <Form >
             <FormGroup>
               <Label for="exampleEmail">Email address</Label>
               <Input type="email" name="email" autoComplete="email" onChange={this.handleLogin} id="exampleEmail" placeholder="with a placeholder" />
