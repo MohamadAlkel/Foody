@@ -81,7 +81,7 @@ export default class LogInForm extends Component {
       return (
         <>
           <h1 className="signupHead"> LOG IN</h1>
-          <Form >
+          <Form onSubmit={this.handleSubmit}>
             <FormGroup>
               <Label for="exampleEmail">Email address</Label>
               <Input type="email" name="email" autoComplete="email" onChange={this.handleLogin} id="exampleEmail" placeholder="with a placeholder" />
@@ -105,7 +105,7 @@ export default class LogInForm extends Component {
             </FormGroup>
 
             <div className="warpBtn">  
-              <Button className="btnLight" onClick={this.handleSubmit} >Log in</Button>
+              <Button className="btnLight"  type="submit" onClick={this.handleSubmit} >Log in</Button>
               <Button className="btnLight" onClick={this.props.showForm}>Go to Sign up</Button>
             </div>
       

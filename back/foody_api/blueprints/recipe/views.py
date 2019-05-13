@@ -163,6 +163,7 @@ def index_all_user():
             "time": recipe.time,
             "username": recipe.user.username,
             "user_id": recipe.user.id,
+
             "user_photo": recipe.user.photo
         } for recipe in recipes]
     }), 200    
@@ -243,6 +244,7 @@ def show_search():
                 "time": recipe.time,
                 "username": recipe.user.username,
                 "user_id": recipe.user.id,
+                "id_owner": recipe.user.id,
                 "user_photo": recipe.user.photo
             } for recipe in recipes]
         }), 200
@@ -299,6 +301,7 @@ def show_search_all():
                 "time": recipe.time,
                 "username": recipe.user.username,
                 "user_id": recipe.user.id,
+                "id_owner": recipe.user.id,
                 "user_photo": recipe.user.photo
             } for recipe in recipes]
         }), 200
