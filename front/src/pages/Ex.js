@@ -30,7 +30,7 @@ export default class Navbars extends React.Component {
   componentWillMount(){
     if(!localStorage.JWT) return (<Redirect to='/Account'/>)
     axios({
-      url: `http://localhost:5000/api/v1/favorite/show`,
+      url: `https://foody-recipe.herokuapp.com/api/v1/favorite/show`,
       method:"get",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -54,7 +54,7 @@ export default class Navbars extends React.Component {
     }
   
     axios({
-      url: `http://localhost:5000/api/v1/favorite/delete`,
+      url: `https://foody-recipe.herokuapp.com/api/v1/favorite/delete`,
       method:"post",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -63,7 +63,9 @@ export default class Navbars extends React.Component {
       data: data
     })
     .then((response)=> {
-      window.location.reload()
+      this.setState({
+        recipes:response.data.recipes
+      })
       
     
     })
@@ -75,7 +77,7 @@ export default class Navbars extends React.Component {
 
   searchApiCall = data => {
     axios({
-      url: `http://localhost:5000/api/v1/favorite/search`,
+      url: `https://foody-recipe.herokuapp.com/api/v1/favorite/search`,
       method:"get",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -96,7 +98,7 @@ export default class Navbars extends React.Component {
 
     if(!localStorage.JWT){
       axios({
-        url: `http://localhost:5000/api/v1/recipe/search/all`,
+        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/search/all`,
         method:"get",          
         headers: {
           // "Authorization": "Bearer " + localStorage.getItem("JWT"),

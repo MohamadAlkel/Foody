@@ -14,11 +14,11 @@ const nameValidate = name => {
 }
 
 const ingredientsValidate = ingredients => {
-  return /^(?=.{50,}$)/.test(ingredients)
+  return /^(.{6,}|[\n|\r|\n\r])+$/.test(ingredients)
 }
 
 const directionsValidate = directions => {
-  return /^(?=.{50,}$)/.test(directions)
+  return /^(.{6,}|[\n|\r|\n\r])+$/.test(directions)
 }
 
 
@@ -88,7 +88,7 @@ export default class FormRecipe extends React.Component {
       });
     } else if (validateName && validateIngredent && validateDir){
       axios({
-        url: `http://localhost:5000/api/v1/recipe/new`,
+        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/new`,
         method:"post",          
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -97,7 +97,8 @@ export default class FormRecipe extends React.Component {
         data: formData
       })
       .then((response)=> {
-        window.location.reload()
+        const {recipes, recipesNum}= response.data
+        this.props.addRecipe(recipesNum, recipes)
       })
       .catch(function (error) {
         console.log(error);
@@ -135,18 +136,18 @@ export default class FormRecipe extends React.Component {
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="exampleText">_Ingredients</Label>
-                  <Input type="textarea" name="ingredients" onChange={this.handleEdit} id="exampleText" />
+                  <Label for="exampleTextOne">_Ingredients</Label>
+                  <Input type="textarea" name="ingredients" onChange={this.handleEdit} id="exampleTextOne" />
                   <div className="textRed ml-2 mt-1" >
-                        {!validateIngredent?`- Oops! characters at least 50`:``}
+                        {!validateIngredent?`- Oops! at least 6 characters for each line`:``}
                   </div>
                 </FormGroup>
 
                 <FormGroup>
-                  <Label for="exampleText">_Directions</Label>
-                  <Input type="textarea" name="directions" onChange={this.handleEdit} id="exampleText" />
+                  <Label for="exampleTextTwo">_Directions</Label>
+                  <Input type="textarea" name="directions" onChange={this.handleEdit} id="exampleTextTwo" />
                   <div className="textRed ml-2 mt-1" >
-                        {!validateDir?`- Oops! characters at least 50`:``}
+                        {!validateDir?`- Oops! at least 6 characters for each line`:``}
                   </div>
                 </FormGroup>
               </Col>

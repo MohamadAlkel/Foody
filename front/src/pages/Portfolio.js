@@ -24,7 +24,7 @@ export default class Recipe extends Component {
       username:"",
       work:"",
       brief:"",
-      photo:"https://storage.googleapis.com/foodymhd/userImg.jpg",
+      photo:"https://storage.googleapis.com/foody-project/userImg.jpg",
       recipes:[],
       following: "",
       followers: "",
@@ -34,6 +34,11 @@ export default class Recipe extends Component {
     }
   }
 
+    componentDidUpdate(props) {
+      if (this.props.match.params.id !== props.match.params.id) {
+        this.showPage()
+      }
+    }
   
   componentWillMount(){
     if(!localStorage.JWT) return (<Redirect to='/Account'/>)
@@ -44,7 +49,7 @@ export default class Recipe extends Component {
   showPage =()=>{
     // to see profile page
     axios({
-      url: `http://localhost:5000/api/v1/users/show/${this.props.match.params.id}`,
+      url: `https://foody-recipe.herokuapp.com/api/v1/users/show/${this.props.match.params.id}`,
       method:"get"         
     })
     .then((response)=> {
@@ -62,7 +67,7 @@ export default class Recipe extends Component {
     });  
     
     axios({
-      url: `http://localhost:5000/api/v1/recipe/show/${this.props.match.params.id}`,
+      url: `https://foody-recipe.herokuapp.com/api/v1/recipe/show/${this.props.match.params.id}`,
       method:"get",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -79,7 +84,7 @@ export default class Recipe extends Component {
     }); 
     
     axios({
-      url: `http://localhost:5000/api/v1/recipe/number/${this.props.match.params.id}`,
+      url: `https://foody-recipe.herokuapp.com/api/v1/recipe/number/${this.props.match.params.id}`,
       method:"get",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -103,7 +108,7 @@ export default class Recipe extends Component {
     }
 
     axios({
-      url: `http://localhost:5000/api/v1/recipe/delete`,
+      url: `https://foody-recipe.herokuapp.com/api/v1/recipe/delete`,
       method:"post",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -111,12 +116,32 @@ export default class Recipe extends Component {
       data: data
     })
     .then((response)=> {
-      window.location.reload()
+      const {recipes, recipesNum}= response.data
+      this.setState({
+        recipesNum,
+        recipes
+      })
     })
     .catch(function (error) {
       console.log(error);
     });
   }  
+
+  editProfile =(username, work, brief, photo)=>{
+    this.setState({
+      username,
+      work,
+      brief,
+      photo
+    })
+  }
+
+  addRecipe =(recipesNum, recipes)=>{
+    this.setState({
+      recipesNum,
+      recipes
+    })
+  }
 
 
   render() {
@@ -145,7 +170,7 @@ export default class Recipe extends Component {
             <p className="job">{work}</p>
 
             {(this.props.match.params.id===localStorage.id)?
-              <div color="success"><EditProfile {...props}  update={this.update}/></div>
+              <div color="success"><EditProfile {...props} editProfile={this.editProfile}  update={this.update}/></div>
               :""
             }
           </div>
@@ -169,7 +194,7 @@ export default class Recipe extends Component {
               <p className="topGreen">_ Brief</p>
               <h6 className="textBrief">{brief}</h6>
               {(this.props.match.params.id===localStorage.id)?
-                <div className="btnUser" color="success"><AddNew /></div>
+                <div className="btnUser" color="success"><AddNew addRecipe={this.addRecipe} /></div>
                 :""
               }
             </div>

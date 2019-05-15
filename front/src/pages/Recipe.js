@@ -30,7 +30,7 @@ export default class Recipe extends Component {
   componentWillMount(){
     if(!localStorage.JWT){
       axios({
-        url: `http://localhost:5000/api/v1/recipe/show/all`,
+        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/show/all`,
         method:"get",          
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -47,7 +47,7 @@ export default class Recipe extends Component {
       });  
     }else{
       axios({
-        url: `http://localhost:5000/api/v1/recipe/show/for/all`,
+        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/show/for/all`,
         method:"get",          
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -71,7 +71,7 @@ export default class Recipe extends Component {
     }
 
     axios({
-      url: `http://localhost:5000/api/v1/favorite/new`,
+      url: `https://foody-recipe.herokuapp.com/api/v1/favorite/new`,
       method:"post",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -79,7 +79,9 @@ export default class Recipe extends Component {
       data: data
     })
     .then((response)=> {
-      window.location.reload()
+      this.setState({
+        recipes: response.data.recipes
+      })
     })
     .catch(function (error) {
       console.log(error);
@@ -90,7 +92,7 @@ export default class Recipe extends Component {
 
     if(!localStorage.JWT){
       axios({
-        url: `http://localhost:5000/api/v1/recipe/search/all`,
+        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/search/all`,
         method:"get",          
         params: {
           ...data
@@ -107,7 +109,7 @@ export default class Recipe extends Component {
       });
     }else{
       axios({
-        url: `http://localhost:5000/api/v1/recipe/search`,
+        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/search`,
         method:"get",          
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("JWT"),

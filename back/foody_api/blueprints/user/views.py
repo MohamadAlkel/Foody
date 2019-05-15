@@ -56,7 +56,7 @@ def new():
         photo = request.files['photo']
         photoName=time+photo.filename
         client = storage.Client()
-        bucket = client.get_bucket('foodymhd')
+        bucket = client.get_bucket('foody-project')
         myBlob = bucket.blob(photoName)
         myBlob.upload_from_string(photo.read())
 
@@ -105,7 +105,8 @@ def create():
         u.save()
 
         user = User.get(User.username == username)
-        access_token = create_access_token(identity=user.id)
+        expires = timedelta(days=365)
+        access_token = create_access_token(user.id, expires_delta=expires)
         return jsonify({
             "access_token": access_token,
             "message": "Successfully created a user and signed in.",

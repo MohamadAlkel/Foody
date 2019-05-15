@@ -28,13 +28,31 @@ def new():
 
     favorite.save()
 
+    favorites = Favorite.select().join(User, on=Favorite.user_id).switch(Favorite).where(Favorite.user_id==id)
+    excluded_chefs = [c.chef_id for c in favorites]
+    recipes = Recipe.select().where((Recipe.user_id != id) & Recipe.user_id.not_in(excluded_chefs))
+   
     return jsonify({
-        "message": "Successfully make a new item.",
         "status": "success",
-        "user": {
-            "id": id,
-        }
-    }), 200
+        "recipes": [{
+            "id":recipe.id,
+            "id_owner":recipe.user.id,
+            "id_user":str(id),
+            "name": recipe.name,
+            "photo": recipe.photo,
+            "countrys": recipe.countrys,
+            "hour": recipe.hour,
+            "sec": recipe.sec,
+            "directions": recipe.directions,
+            "ingredients": recipe.ingredients,
+            "time": recipe.time,
+            "username": recipe.user.username,
+            "user_id": recipe.user.id,
+            "user_photo": recipe.user.photo
+        } for recipe in recipes]
+    }), 200  
+
+
 
 
 @favorite_api_blueprint.route('/delete', methods=['POST'])
@@ -45,8 +63,26 @@ def delete():
 
     delete= Favorite.delete().where(Favorite.user == id , Favorite.chef == id_owner)
     delete.execute()
+
+    recipes= Recipe.select().join(Favorite, on=Favorite.chef_id == Recipe.user_id).where(Favorite.user_id == id)
     
-    return jsonify({"msg":"you removing is successful"}),200
+    return jsonify({
+        "status": "success",
+        "recipes": [{
+            "id":recipe.id,
+            "name": recipe.name,
+            "photo": recipe.photo,
+            "countrys": recipe.countrys,
+            "hour": recipe.hour,
+            "sec": recipe.sec,
+            "directions": recipe.directions,
+            "ingredients": recipe.ingredients,
+            "time": recipe.time,
+            "username": recipe.user.username,
+            "id_owner": recipe.user.id,
+            "user_photo": recipe.user.photo
+        } for recipe in recipes]
+    }), 200
 
  
 

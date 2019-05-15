@@ -65,7 +65,7 @@ export default class FormEdit extends React.Component {
 
     if (validateWork && validateBrief && validateUsername ){
       axios({
-        url: `http://localhost:5000/api/v1/users/new`,
+        url: `https://foody-recipe.herokuapp.com/api/v1/users/new`,
         method:"post",          
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -74,7 +74,9 @@ export default class FormEdit extends React.Component {
         data: formData
       })
       .then((response)=> {
-        window.location.reload()
+        const {username, work, brief, photo}= response.data.user
+        
+        this.props.editProfile(username, work, brief, photo)
       })
       .catch(function (error) {
         console.log(error);

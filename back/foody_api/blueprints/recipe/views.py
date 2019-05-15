@@ -37,7 +37,7 @@ def new():
     photo = request.files['photo']
     photoName=time+photo.filename
     client = storage.Client()
-    bucket = client.get_bucket('foodymhd')
+    bucket = client.get_bucket('foody-project')
     myBlob = bucket.blob(photoName)
     myBlob.upload_from_string(photo.read())
 
@@ -59,18 +59,31 @@ def new():
     recipe.save()
 
      
-    url_photo = recipe.photo
+    user = User.get_or_none(User.id == id)
+    recipes = Recipe.select().where(Recipe.user_id == id) 
+
+     
+    # url_photo = recipe.photo
+    my_recipes = Recipe.select().where(Recipe.user_id==id)
+    recipesNum = len([c.id for c in my_recipes])
     
     return jsonify({
-        "message": "Successfully make a new item.",
         "status": "success",
-        "user": {
-            "id": id,
-            "name": name,
-            "ingredients": ingredients,
-            "countrys": countrys,
-            "photo": url_photo
-        }
+        "recipesNum":recipesNum,
+        "recipes": [{
+            "id":recipe.id,
+            "name": recipe.name,
+            "photo": recipe.photo,
+            "countrys": recipe.countrys,
+            "hour": recipe.hour,
+            "sec": recipe.sec,
+            "directions": recipe.directions,
+            "ingredients": recipe.ingredients,
+            "time": recipe.time,
+            "username": user.username,
+            "user_id": user.id,
+            "user_photo": user.photo
+        } for recipe in recipes]
     }), 200
 
 
@@ -110,7 +123,35 @@ def delele_recipe():
 
     delete= Recipe.delete().where(Recipe.user_id == user.id , Recipe.id == recipe.id)
     delete.execute()
-    return jsonify({"msg":"you removing is successful"}),200
+
+    user = User.get_or_none(User.id == id)
+    recipes = Recipe.select().where(Recipe.user_id == id) 
+
+     
+    # url_photo = recipe.photo
+    my_recipes = Recipe.select().where(Recipe.user_id==id)
+    recipesNum = len([c.id for c in my_recipes])
+    
+    return jsonify({
+        "status": "success",
+        "recipesNum":recipesNum,
+        "recipes": [{
+            "id":recipe.id,
+            "name": recipe.name,
+            "photo": recipe.photo,
+            "countrys": recipe.countrys,
+            "hour": recipe.hour,
+            "sec": recipe.sec,
+            "directions": recipe.directions,
+            "ingredients": recipe.ingredients,
+            "time": recipe.time,
+            "username": user.username,
+            "user_id": user.id,
+            "user_photo": user.photo
+        } for recipe in recipes]
+    }), 200
+
+
 
 
 @recipe_api_blueprint.route('/show/for/all', methods=['GET'])

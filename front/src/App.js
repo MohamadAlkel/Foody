@@ -33,13 +33,17 @@ class App extends Component {
     this.state = {
       isOpen: false,
       logout:localStorage.username,
-      dropdownOpen: false
+      dropdownOpen: false,
+      userUrl:""
     };
 
     this.toggle = this.toggle.bind(this);
     this.toggleBtn = this.toggleBtn.bind(this);
   }
 
+  componentWillMount(){
+    this.setState({userUrl:localStorage.id})
+  }
 
   toggle() {
     this.setState({
@@ -47,11 +51,15 @@ class App extends Component {
     });
   }
 
+
+
+
   toggleBtn() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
   }
+
 
   logoutHandler = () =>{
     localStorage.removeItem("JWT")
@@ -60,10 +68,6 @@ class App extends Component {
     localStorage.removeItem("username")
     localStorage.removeItem("location")
     localStorage.removeItem("destination")
-  }
-
-  onClickGo =()=>{
-    window.location.href = `${window.location.origin}/Profile/${localStorage.id}`
   }
 
 
@@ -103,8 +107,7 @@ class App extends Component {
                     <div className={navbaritem}>
                     <NavItem>
                       <NavLink 
-                        onClick={this.onClickGo}
-                        to={`/Profile/${localStorage.id}`}
+                        to={`/Profile/${this.state.userUrl}`}
                         activeClassName="activeNav"
                         className="navitem green"
                       > 

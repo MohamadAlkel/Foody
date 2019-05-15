@@ -24,7 +24,7 @@ export default class AddNew extends React.Component {
         <Button color="success" onClick={this.toggle}>Add New Recipe</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Add New Recipe</ModalHeader>
-          <FormRecipe toggle={this.toggle}/>
+          <FormRecipe addRecipe={this.props.addRecipe} toggle={this.toggle}/>
         </Modal>
       </>
     )

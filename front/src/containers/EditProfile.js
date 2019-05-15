@@ -25,7 +25,7 @@ export default class EditProfile extends React.Component {
         <Button color="success" onClick={this.toggle}>Edit Profile</Button>
         <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
           <ModalHeader toggle={this.toggle}>Edit Profile</ModalHeader>
-          <FormEdit  toggle={this.toggle}  {...this.props}/>
+          <FormEdit  toggle={this.toggle} editProfile={this.props.editProfile} {...this.props}/>
         </Modal>
       </>
     );
