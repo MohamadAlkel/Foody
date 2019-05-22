@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form, FormGroup, Label, Input, Col, FormText, Row,
   ModalBody, ModalFooter, Button, Modal} from 'reactstrap';
-import '../styles/Portfolio.css';
+import '../styles/Profile.css';
 import  Country  from './CountrySelector';
 import axios from "axios";
 import Moment from 'react-moment';

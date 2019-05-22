@@ -9,7 +9,7 @@ import axios from "axios";
 import Add from '../styles/img/add.png'
 import  Country  from '../components/CountrySelector';
 import  LoaderRecipe  from '../components/LoaderRecipe';
-import '../styles/Portfolio.css';
+import '../styles/Profile.css';
 import ReadMoreAndLess from 'react-read-more-less';
 
 

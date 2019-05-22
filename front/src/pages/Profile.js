@@ -3,7 +3,7 @@ import { Card, CardImg, CardTitle, CardText, CardColumns,
     CardSubtitle, CardBody,  Button,   
      } from 'reactstrap';
 import '../styles/Recipe.css';
-import '../styles/Portfolio.css';
+import '../styles/Profile.css';
 import time from '../styles/img/time.png'
 import location from '../styles/img/location.png'
 import  AddNew  from '../containers/AddNew';
@@ -17,7 +17,7 @@ import  LoaderProfile  from '../components/LoaderProfile';
 
 
 
-export default class Recipe extends Component {
+export default class Profile extends Component {
   constructor(props) {
     super(props);
     this.state={

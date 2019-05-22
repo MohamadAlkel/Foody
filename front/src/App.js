@@ -13,8 +13,8 @@ import {
 import React, { Component } from 'react';
 import './App.css';
 import  Recipe  from './pages/Recipe';
-import  Ex  from './pages/Ex';
-import  Portfolio  from './pages/Portfolio';
+import  Favorite  from './pages/Favorite';
+import  Profile  from './pages/Profile';
 import Notfound  from "./pages/Notfound";
 import  SignupLogin  from './pages/SignupLogin';
 import {
@@ -150,8 +150,8 @@ class App extends Component {
         
           <Switch>
             <Route exact path="/" component={Recipe} />
-            <Route path="/Favorite" component={Ex} />
-            <Route path="/Profile/:id" component={Portfolio} />
+            <Route path="/Favorite" component={Favorite} />
+            <Route path="/Profile/:id" component={Profile} />
             <Route path="/Account" component={SignupLogin} />
             <Route  component={Notfound} />
           </Switch>
