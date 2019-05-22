@@ -49,7 +49,7 @@ export default class Recipe extends Component {
   showPage =()=>{
     // to see profile page
     axios({
-      url: `https://foody-recipe.herokuapp.com/api/v1/users/show/${this.props.match.params.id}`,
+      url: `http://localhost:5000/api/v1/users/show/${this.props.match.params.id}`,
       method:"get"         
     })
     .then((response)=> {
@@ -67,7 +67,7 @@ export default class Recipe extends Component {
     });  
     
     axios({
-      url: `https://foody-recipe.herokuapp.com/api/v1/recipe/show/${this.props.match.params.id}`,
+      url: `http://localhost:5000/api/v1/recipe/show/${this.props.match.params.id}`,
       method:"get",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -84,7 +84,7 @@ export default class Recipe extends Component {
     }); 
     
     axios({
-      url: `https://foody-recipe.herokuapp.com/api/v1/recipe/number/${this.props.match.params.id}`,
+      url: `http://localhost:5000/api/v1/recipe/number/${this.props.match.params.id}`,
       method:"get",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -108,7 +108,7 @@ export default class Recipe extends Component {
     }
 
     axios({
-      url: `https://foody-recipe.herokuapp.com/api/v1/recipe/delete`,
+      url: `http://localhost:5000/api/v1/recipe/delete`,
       method:"post",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -141,6 +141,10 @@ export default class Recipe extends Component {
       recipesNum,
       recipes
     })
+  }
+
+  openMore =()=>{
+
   }
 
 
@@ -202,70 +206,76 @@ export default class Recipe extends Component {
         </div>
       </div>
 
-      <CardColumns className="cardStyle">
+      
+      
+      <CardColumns  className="cardStyle mt-0">
 
         { this.state.recipes.map(recipe => {
-          return (
-            <Card className="bigCard" key={recipe.id}>
-              <div className="warpCard">
-                <div className="colors">
-
-                  <div className="row">
-                    <div className=" user">
-                      <div className="userImg">
-                        <CardImg top  className="userImgtwo" src={recipe.user_photo} alt="Card image cap" />
-                      </div>
-                      <div className="userText">
-                        <CardSubtitle className="usernamePost">{recipe.username}</CardSubtitle>
-                        <CardText className="timePost">
-                          {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(recipe.time)}
-                        </CardText>
+            return (
+              <Card  className="bigCard" key={recipe.id}>
+                <div className="warpCard">
+                  <div className="colors">
+                    <div className="row">
+                      <div className=" user">
+                        <div className="userImg">
+                          <CardImg top  className="userImgtwo" src={recipe.user_photo} alt="Card image cap" />
+                        </div>
+                        <div className="userText">
+                          <a className="userId" href={`/Profile/${recipe.user_id}`}>
+                            <CardSubtitle className="usernamePost">{recipe.username}</CardSubtitle>
+                          </a>
+                          <CardText className="timePost">
+                            {new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit'}).format(recipe.time)}
+                          </CardText>
+                        </div>
                         {(this.props.match.params.id===localStorage.id)?
-                          <Button className="x" close  onClick={()=>{this.deleteRecipe(recipe.id)}}/>
-                          :""
-                        }
+                            <Button className="x " close  onClick={()=>{this.deleteRecipe(recipe.id)}}/>
+                            :""
+                          }
                       </div>
                     </div>
-                  </div>
                   
-                  <CardImg top width="100%" className="recipeImg" src={recipe.photo} alt="Card image cap" />
-                  <CardTitle className="info">
-                    <img className="icon" src={time} alt="time icon" />
-                      0{recipe.hour}:{recipe.sec}
-                    <img className="icon iconSpace" src={location} alt="location icon" />
-                      {recipe.countrys}
-                  </CardTitle>
-
-                  <div className="row">
-                    <a className="cir" href="/" >
-                      <img src={Def} height="30px" alt="icon"/>
-                    </a>
-                    <CardTitle className="recipeHead">
-                      {recipe.name}
+                    <CardImg top width="100%" className="recipeImg" src={recipe.photo} alt="Card image cap" />
+                    <CardTitle className="info">
+                      <img className="icon" src={time} alt="time icon" />
+                        0{recipe.hour}:{recipe.sec}   
+                      <img className="icon iconSpace" src={location} alt="location icon" /> 
+                        {recipe.countrys}
                     </CardTitle>
-                  </div>
-                </div>  
+
+                    <div className="row">
+                      {localStorage.JWT?
+                        <p className="cir" onClick={()=>{this.addToFavorite( recipe.id_owner)}}  >
+                          <img src={Def} height="30px" alt="icon follow"/>
+                        </p>
+                        :<a className="cir"  href='/Account' >
+                          <img src={Def} height="30px" alt="icon follow"/>
+                        </a>
+                      }
+                      <CardTitle className="recipeHead">{recipe.name}</CardTitle>
+                    </div>
+                  </div>  
                 
-                <CardBody className="colorsTwo">
-                  <div className="insideGreen">
-                    <CardTitle className="headGreen">_ Ingredients</CardTitle>
-                    <CardText className="textGreen">{recipe.ingredients}</CardText>
-                    <CardTitle className="headGreen">_ Directions</CardTitle>
-                    <div className="read">
-                      <ReadMoreAndLess
-                          ref={this.ReadMore}
-                          className="read-more-content read"
-                          charLimit={150}
-                          readMoreText="Read more"
-                          readLessText="Read less"
-                      >
-                          {recipe.directions}
-                      </ReadMoreAndLess>
-                    </div>  
-                  </div>
-                </CardBody>
-              </div>
-            </Card>
+                  <CardBody className="colorsTwo">
+                    <div className="insideGreen">
+                      <CardTitle className="headGreen">_ Ingredients</CardTitle>
+                      <CardText className="textGreen">{recipe.ingredients}</CardText>
+                      <CardTitle className="headGreen">_ Directions</CardTitle>
+                      <div className="read">
+                        <ReadMoreAndLess
+                            ref={this.ReadMore}
+                            className="read-more-content read"
+                            charLimit={150}
+                            readMoreText="Read more"
+                            readLessText="Read less"
+                        >
+                            {recipe.directions}
+                        </ReadMoreAndLess>
+                      </div> 
+                    </div>
+                  </CardBody>
+                </div>
+              </Card>
             )
           })
         }

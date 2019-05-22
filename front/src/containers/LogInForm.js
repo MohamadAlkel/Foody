@@ -45,7 +45,7 @@ export default class LogInForm extends Component {
           password:password,
         }
 
-        axios.post(`https://foody-recipe.herokuapp.com/api/v1/users/login`, data)
+        axios.post(`http://localhost:5000/api/v1/users/login`, data)
         .then((response)=> {
           
           if(response.data.msg === "bad Login"){ 

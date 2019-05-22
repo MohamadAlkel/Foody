@@ -65,7 +65,7 @@ export default class FormEdit extends React.Component {
 
     if (validateWork && validateBrief && validateUsername ){
       axios({
-        url: `https://foody-recipe.herokuapp.com/api/v1/users/new`,
+        url: `http://localhost:5000/api/v1/users/new`,
         method:"post",          
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("JWT"),

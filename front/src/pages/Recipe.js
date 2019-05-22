@@ -30,7 +30,7 @@ export default class Recipe extends Component {
   componentWillMount(){
     if(!localStorage.JWT){
       axios({
-        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/show/all`,
+        url: `http://localhost:5000/api/v1/recipe/show/all`,
         method:"get",          
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -47,7 +47,7 @@ export default class Recipe extends Component {
       });  
     }else{
       axios({
-        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/show/for/all`,
+        url: `http://localhost:5000/api/v1/recipe/show/for/all`,
         method:"get",          
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -71,7 +71,7 @@ export default class Recipe extends Component {
     }
 
     axios({
-      url: `https://foody-recipe.herokuapp.com/api/v1/favorite/new`,
+      url: `http://localhost:5000/api/v1/favorite/new`,
       method:"post",          
       headers: {
         "Authorization": "Bearer " + localStorage.getItem("JWT"),
@@ -92,7 +92,7 @@ export default class Recipe extends Component {
 
     if(!localStorage.JWT){
       axios({
-        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/search/all`,
+        url: `http://localhost:5000/api/v1/recipe/search/all`,
         method:"get",          
         params: {
           ...data
@@ -109,7 +109,7 @@ export default class Recipe extends Component {
       });
     }else{
       axios({
-        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/search`,
+        url: `http://localhost:5000/api/v1/recipe/search`,
         method:"get",          
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("JWT"),

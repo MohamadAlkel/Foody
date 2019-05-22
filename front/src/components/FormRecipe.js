@@ -88,7 +88,7 @@ export default class FormRecipe extends React.Component {
       });
     } else if (validateName && validateIngredent && validateDir){
       axios({
-        url: `https://foody-recipe.herokuapp.com/api/v1/recipe/new`,
+        url: `http://localhost:5000/api/v1/recipe/new`,
         method:"post",          
         headers: {
           "Authorization": "Bearer " + localStorage.getItem("JWT"),

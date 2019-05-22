@@ -75,7 +75,7 @@ export default class SignUpForm extends React.Component {
         password
       }
 
-      axios.post(`https://foody-recipe.herokuapp.com/api/v1/users/newuser`, data)
+      axios.post(`http://localhost:5000/api/v1/users/newuser`, data)
       .then((response) => {
         localStorage.setItem('username', response.data.user.username)
         localStorage.setItem('id', response.data.user.id)

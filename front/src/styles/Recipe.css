@@ -19,6 +19,7 @@
 
 .recipeImg{
     border-radius:10px;
+    margin: auto;
 }
 
 .info{
@@ -26,7 +27,7 @@
     font-size: 18px;
     text-align: left;
     color: #212529;
-    margin-top: 5px;
+    margin-top: 10px;
 }
 
 .icon{
@@ -35,7 +36,7 @@
     padding-left: 3px;
     border-left: 3px solid #00ba51;
     border-radius: 10px;
-    margin-left:10px;
+    margin-left:5px;
 }
 
 .iconSpace{
@@ -207,7 +208,7 @@
 
 .user{
     display: flex;
-    margin-bottom:20px 
+    margin-bottom:20px;
 }
 
 .userText{
