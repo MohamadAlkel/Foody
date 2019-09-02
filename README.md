@@ -1,5 +1,5 @@
 # Foody
-# Build by Python & Reactjs
+# Python & Reactjs
 
 website for recipe ...
 Social Media Site for add and read recipes.
